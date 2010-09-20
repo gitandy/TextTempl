@@ -190,5 +190,17 @@ void MainApp::pasteFromClip()
 
 void MainApp::showAbout()
 {
-    QMessageBox::information(this, tr("About"), "(c) 2010 A. Schawo\n\n" + tr("TextTempl") + "\nVersion: " + QString(VERSION) + "-" + QString(MODIFIED));
+    QString modified = "";
+
+    if(QString(MODIFIED) == "M") {
+        modified = "-Modified";
+    }
+
+#ifdef QT_NO_DEBUG
+    QString debug = "";
+#else
+    QString debug = "-Debug";
+#endif
+
+    QMessageBox::information(this, tr("About"), "(c) 2010 A. Schawo\n\n" + tr("TextTempl") + "\nVersion: " + QString(VERSION) + modified + debug);
 }
