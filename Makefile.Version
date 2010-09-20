@@ -1,0 +1,17 @@
+VERSION = $(shell git describe)
+
+all: version.h
+
+.PHONY: version.h
+
+version.h:
+	echo "#define VERSION \"$(VERSION)\"" > $@
+
+ifeq ($(shell git diff --name-only),)
+	echo "#define MODIFIED \"\"" >> $@
+else
+	echo "#define MODIFIED \"M\"" >> $@
+endif
+
+clean:
+	rm -f version.h

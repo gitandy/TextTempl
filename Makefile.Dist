@@ -1,0 +1,29 @@
+VERSION = $(shell git describe)
+
+all: package
+
+i18n:
+	lupdate -silent TextTempl.pro
+	lrelease TextTempl.pro
+
+package: i18n 
+	rm -f dist/TextTempl-*.zip
+
+ifeq ($(OS),Windows_NT)
+	cd release; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip TextTempl.exe
+else
+	cd release; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip TextTempl
+endif
+
+	7z a -tzip dist/TextTempl-$(VERSION).zip TextTempl_*.qm
+	
+ifeq ($(OS),Windows_NT)
+	cd lib; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip *.dll
+endif
+
+clean:
+	rm -Rf dist
+	rm -f TextTempl_*.qm

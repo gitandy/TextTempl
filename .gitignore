@@ -1,0 +1,16 @@
+*~
+\#*\#
+ui_*.h
+version.*
+*.o
+*.qm
+moc
+obj
+qrc_*.cpp
+debug
+release
+dist
+Makefile
+Makefile.Debug
+Makefile.Release
+TextTempl
