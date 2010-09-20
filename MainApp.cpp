@@ -37,17 +37,27 @@ MainApp::MainApp(QMainWindow *parent)
     actionPaste->setEnabled(false);
 
     templ = "";
+
+    this->last_openpath = QDir::homePath();
+    this->last_savepath = "";
 }
 
 void MainApp::openFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), QDir::homePath(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->last_openpath, tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         QFile *templFile = new QFile(fileName);
         if(!templFile->open(QIODevice::ReadOnly))
             QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
         else {
+            int posLastSep = fileName.lastIndexOf('/', -1);
+            this->last_openpath = fileName.left(posLastSep);
+
+            if(this->last_savepath == "") {
+                this->last_savepath = this->last_openpath;
+            }
+
             QTextStream *ts = new QTextStream(templFile);
             templ = ts->readAll();
             templFile->close();
@@ -76,13 +86,16 @@ void MainApp::openFile()
 
 void MainApp::saveFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), QDir::homePath(), tr("All Files") + " (*.*)");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->last_savepath, tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         QFile *file = new QFile(fileName);
         if(!file->open(QIODevice::WriteOnly))
             QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
         else {
+            int posLastSep = fileName.lastIndexOf('/', -1);
+            this->last_savepath = fileName.left(posLastSep);
+
             QTextStream *ts = new QTextStream(file);
 
             QString txt = templ;

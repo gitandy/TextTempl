@@ -27,4 +27,7 @@ class MainApp
      QMap<QString, QTableWidgetItem*> buildTable(QString templ);
      void resetTable();
      QClipboard *clipboard;
+
+     QString last_openpath;
+     QString last_savepath;
  }; 
