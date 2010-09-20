@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QTextStream>
+#include <QSettings>
 
 #include "MainApp.h"
 
@@ -38,13 +39,28 @@ MainApp::MainApp(QMainWindow *parent)
 
     templ = "";
 
-    this->last_openpath = QDir::homePath();
-    this->last_savepath = "";
+    //Settings
+    this->settings = new QSettings("schawo.de", "TextTempl");
+
+    if(!this->settings->contains("openpath")) {
+        this->settings->setValue("openpath", QDir::homePath());
+    }
+
+    if(!this->settings->contains("savepath")) {
+        this->settings->setValue("savepath", QDir::homePath());
+    }
+
+    this->settings->sync();
+}
+
+MainApp::~MainApp()
+{
+    this->settings->sync();
 }
 
 void MainApp::openFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->last_openpath, tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->settings->value("openpath").toString(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         QFile *templFile = new QFile(fileName);
@@ -52,11 +68,7 @@ void MainApp::openFile()
             QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
         else {
             int posLastSep = fileName.lastIndexOf('/', -1);
-            this->last_openpath = fileName.left(posLastSep);
-
-            if(this->last_savepath == "") {
-                this->last_savepath = this->last_openpath;
-            }
+            this->settings->setValue("openpath", fileName.left(posLastSep));
 
             QTextStream *ts = new QTextStream(templFile);
             templ = ts->readAll();
@@ -86,7 +98,7 @@ void MainApp::openFile()
 
 void MainApp::saveFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->last_savepath, tr("All Files") + " (*.*)");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString(), tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         QFile *file = new QFile(fileName);
@@ -94,7 +106,7 @@ void MainApp::saveFile()
             QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
         else {
             int posLastSep = fileName.lastIndexOf('/', -1);
-            this->last_savepath = fileName.left(posLastSep);
+            this->settings->setValue("savepath", fileName.left(posLastSep));
 
             QTextStream *ts = new QTextStream(file);
 

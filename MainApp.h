@@ -4,6 +4,7 @@
 #include <QTableWidgetItem>
 #include <QApplication>
 #include <QClipboard>
+#include <QSettings>
 #include "ui_TextTempl.h"
 
 class MainApp 
@@ -13,6 +14,8 @@ class MainApp
 
  public:
      MainApp(QMainWindow *parent = 0);
+     virtual ~MainApp();
+
      QMap<QString,  QTableWidgetItem*> fmap;
      QString templ;
 
@@ -28,6 +31,5 @@ class MainApp
      void resetTable();
      QClipboard *clipboard;
 
-     QString last_openpath;
-     QString last_savepath;
+     QSettings *settings;
  }; 
