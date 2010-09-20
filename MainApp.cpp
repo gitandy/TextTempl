@@ -26,6 +26,9 @@ MainApp::MainApp(QMainWindow *parent)
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
     this->connect(this->actionPaste,SIGNAL(triggered()),SLOT(pasteFromClip()));
 
+    this->connect(this->actionInsertCol,SIGNAL(triggered()),SLOT(insertCol()));
+    this->connect(this->actionDeleteCol,SIGNAL(triggered()),SLOT(deleteCol()));
+
     this->resetTable();
 
     tableWidget->resizeRowsToContents();
@@ -42,6 +45,9 @@ MainApp::MainApp(QMainWindow *parent)
     this->last_savepath = "";
 }
 
+/*
+ * private slot
+ */
 void MainApp::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->last_openpath, tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
@@ -84,6 +90,9 @@ void MainApp::openFile()
     }
 }
 
+/*
+ * private slot
+ */
 void MainApp::saveFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->last_savepath, tr("All Files") + " (*.*)");
@@ -153,18 +162,15 @@ QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
     return fmap;
 }
 
+/*
+ * private slot
+ */
 void MainApp::resetTable() 
 {
     tableWidget->clear();
 
     tableWidget->setRowCount(1);
     tableWidget->setColumnCount(1);
-
-    QTableWidgetItem *__colItem = new QTableWidgetItem();
-    __colItem->setText(QApplication::translate("MainWindow", "Content", 0, QApplication::UnicodeUTF8));
-    tableWidget->setHorizontalHeaderItem(0, __colItem);
-    if (tableWidget->rowCount() < 1)
-        tableWidget->setRowCount(1);
 
     QTableWidgetItem *__rowItem = new QTableWidgetItem();
     __rowItem->setText(QApplication::translate("MainWindow", "Parameter", 0, QApplication::UnicodeUTF8));
@@ -175,6 +181,25 @@ void MainApp::resetTable()
     tableWidget->setItem(0, 0, __item);
 }
 
+/*
+ * private slot
+ */
+void MainApp::insertCol()
+{
+    this->tableWidget->setColumnCount(this->tableWidget->columnCount() + 1);
+}
+
+/*
+ * private slot
+ */
+void MainApp::deleteCol()
+{
+
+}
+
+/*
+ * private slot
+ */
 void MainApp::copyToClip()
 {
     QString clipText = "";
@@ -188,6 +213,9 @@ void MainApp::copyToClip()
     clipboard->setText(clipText);
 }
 
+/*
+ * private slot
+ */
 void MainApp::pasteFromClip()
 {
     QString clipText = clipboard->text();
@@ -201,6 +229,9 @@ void MainApp::pasteFromClip()
     }
 }
 
+/*
+ * private slot
+ */
 void MainApp::showAbout()
 {
     QString modified = "";

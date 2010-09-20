@@ -22,6 +22,8 @@ class MainApp
      void showAbout();
      void copyToClip();
      void pasteFromClip();
+     void insertCol();
+     void deleteCol();
 
  private:
      QMap<QString, QTableWidgetItem*> buildTable(QString templ);
