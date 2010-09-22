@@ -240,7 +240,10 @@ void MainApp::pasteFromClip()
     for(int r = 0; r < lineList.size() && r < this->tableWidget->rowCount(); r++){
         QStringList colList = lineList[r].split("\t");
 
-        for(int c = 0; c < colList.size() && c < this->tableWidget->columnCount(); c++){
+        for(int c = 0; c < colList.size(); c++){
+            if(c == this->tableWidget->columnCount()) {
+                this->tableWidget->setColumnCount(c + 1);
+            }
             QTableWidgetItem *item = new QTableWidgetItem(colList[c].trimmed());
             this->tableWidget->setItem(r, c , item);
         }
