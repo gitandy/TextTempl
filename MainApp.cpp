@@ -23,6 +23,7 @@ MainApp::MainApp(QMainWindow *parent)
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
     this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
+    this->connect(this->actionSaveAll,SIGNAL(triggered()),SLOT(saveAll()));
     this->connect(this->actionClose,SIGNAL(triggered()),SLOT(closeFile()));
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
@@ -94,6 +95,7 @@ void MainApp::openFile()
                 this->tableWidget->setEnabled(true);
                 this->actionLoadData->setEnabled(true);
                 this->actionSave->setEnabled(true);
+                this->actionSaveAll->setEnabled(true);
                 this->actionClose->setEnabled(true);
                 this->actionCopy->setEnabled(true);
                 this->actionPaste->setEnabled(true);
@@ -104,6 +106,7 @@ void MainApp::openFile()
                 this->tableWidget->setEnabled(false);
                 this->actionLoadData->setEnabled(false);
                 this->actionSave->setEnabled(false);
+                this->actionSaveAll->setEnabled(false);
                 this->actionClose->setEnabled(false);
                 this->actionCopy->setEnabled(false);
                 this->actionPaste->setEnabled(false);
@@ -163,40 +166,67 @@ void MainApp::saveFile()
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString() + fileDefault, tr("All Files") + " (*.*)");
 
     if(fileName != "") {
-        QFile *file = new QFile(fileName);
-        if(!file->open(QIODevice::WriteOnly))
-            QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
-        else {
-            int posLastSep = fileName.lastIndexOf('/', -1);
-            this->settings->setValue("savepath", fileName.left(posLastSep));
+        int posLastSep = fileName.lastIndexOf('/', -1);
+        this->settings->setValue("savepath", fileName.left(posLastSep));
 
-            QTextStream *ts = new QTextStream(file);
+        this->writeFile(fileName, col);
+    }
+}
 
-            QString txt = templ;
+void MainApp::writeFile(QString fileName, int col)
+{
+    QFile *file = new QFile(fileName);
+    if(!file->open(QIODevice::WriteOnly))
+        QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
+    else {
+        QTextStream *ts = new QTextStream(file);
 
-            int col = 0;
-            QList<QTableWidgetItem*> selList = this->tableWidget->selectedItems();
-            if(selList.size() > 0){
-                col = selList[0]->column();
+        QString txt = templ;
+
+        QMapIterator<QString, int> i(fmap);
+        while (i.hasNext()) {
+            QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
+
+            QTableWidgetItem *item = this->tableWidget->item(i.value(), col);
+            QString text = "";
+            if(item != 0) {
+                text = item->text();
             }
 
-            QMapIterator<QString, int> i(fmap);
-            while (i.hasNext()) {
-                QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
-
-                QTableWidgetItem *item = this->tableWidget->item(i.value(), col);
-                QString text = "";
-                if(item != 0) {
-                    text = item->text();
-                }
-
-                txt.replace(QRegExp(repl), text);
-            }
-
-            *ts << txt;
-            ts->flush();
-            file->close();
+            txt.replace(QRegExp(repl), text);
         }
+
+        *ts << txt;
+        ts->flush();
+        file->close();
+    }
+}
+
+/*
+ * private slot
+ */
+void MainApp::saveAll()
+{
+    QString dirName = QFileDialog::getExistingDirectory(this, tr("Save all"), this->settings->value("savepath").toString(), QFileDialog::ShowDirsOnly);
+
+    this->settings->setValue("savepath", dirName);
+
+    for(int c = 0; c < this->tableWidget->columnCount(); c++) {
+        QString fileName = "";
+        if(fmap.contains(tr("Name"))){
+            QTableWidgetItem *item = this->tableWidget->item(fmap.value(tr("Name")), c);
+            if(item != 0 && item->text().trimmed() != "") {
+                fileName = item->text();
+            }
+        }
+
+        if(fileName == "") {
+            fileName = tr("unnamed") + "_" + QString::number(c);
+        }
+
+        fileName = dirName + "/" + fileName + ".txt";
+
+        this->writeFile(fileName, c);
     }
 }
 
@@ -210,6 +240,7 @@ void MainApp::closeFile()
     this->tableWidget->setEnabled(false);
     this->actionLoadData->setEnabled(false);
     this->actionSave->setEnabled(false);
+    this->actionSaveAll->setEnabled(false);
     this->actionClose->setEnabled(false);
     this->actionCopy->setEnabled(false);
     this->actionPaste->setEnabled(false);

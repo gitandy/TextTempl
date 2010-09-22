@@ -11,5 +11,6 @@
         <file>images/info.png</file>
         <file>images/insert_table_col.png</file>
         <file>images/logo.png</file>
+        <file>images/save_all.png</file>
     </qresource>
 </RCC>

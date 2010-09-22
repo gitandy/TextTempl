@@ -23,6 +23,7 @@ class MainApp
      void openFile();
      void openDataFile();
      void saveFile();
+     void saveAll();
      void closeFile();
      void showAbout();
      void copyToClip();
@@ -31,6 +32,7 @@ class MainApp
      void deleteCol();
 
  private:
+     void writeFile(QString fileName, int col);
      QMap<QString, int> buildTable(QString templ);
      void resetTable();
      void fillTable(QString text, QString colSep);
