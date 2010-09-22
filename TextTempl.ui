@@ -82,6 +82,8 @@
     <addaction name="separator"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
+    <addaction name="actionClose"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -108,7 +110,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="TextTempl.qrc">
-     <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
+     <normaloff>:/images/fileopen.png</normaloff>:/images/fileopen.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -118,9 +120,12 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
-     <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
+     <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -144,7 +149,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="TextTempl.qrc">
-     <normaloff>:/images/about.png</normaloff>:/images/about.png</iconset>
+     <normaloff>:/images/info.png</normaloff>:/images/info.png</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -159,7 +164,7 @@
    </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
-     <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
+     <normaloff>:/images/editcopy.png</normaloff>:/images/editcopy.png</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -174,7 +179,7 @@
    </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
-     <normaloff>:/images/paste.png</normaloff>:/images/paste.png</iconset>
+     <normaloff>:/images/editpaste.png</normaloff>:/images/editpaste.png</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -208,8 +213,33 @@
    </property>
   </action>
   <action name="actionLoadData">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/fileopendata.png</normaloff>:/images/fileopendata.png</iconset>
+   </property>
    <property name="text">
     <string>Load Data</string>
+   </property>
+   <property name="toolTip">
+    <string>&amp;Load Data</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/fileclose.png</normaloff>:/images/fileclose.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close</string>
    </property>
   </action>
  </widget>

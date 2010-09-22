@@ -23,6 +23,7 @@ class MainApp
      void openFile();
      void openDataFile();
      void saveFile();
+     void closeFile();
      void showAbout();
      void copyToClip();
      void pasteFromClip();

@@ -73,10 +73,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Content</source>
-        <translation type="obsolete">Inhalt</translation>
-    </message>
-    <message>
         <location filename="MainApp.cpp" line="233"/>
         <source>Parameter</source>
         <translation></translation>
@@ -87,49 +83,49 @@
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="78"/>
+        <location filename="TextTempl.ui" line="85"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="89"/>
+        <location filename="TextTempl.ui" line="96"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="114"/>
+        <location filename="TextTempl.ui" line="120"/>
         <source>&amp;Open</source>
         <translation>Ö&amp;ffnen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="117"/>
+        <location filename="TextTempl.ui" line="123"/>
         <source>Ctrl+O</source>
-        <translation>Ctrl+F</translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="126"/>
+        <location filename="TextTempl.ui" line="131"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="129"/>
+        <location filename="TextTempl.ui" line="134"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="138"/>
+        <location filename="TextTempl.ui" line="142"/>
         <source>E&amp;xit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="150"/>
+        <location filename="TextTempl.ui" line="153"/>
         <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="153"/>
+        <location filename="TextTempl.ui" line="156"/>
         <source>Ctrl+A</source>
-        <translation>Ctrl+Ü</translation>
+        <translation>Ctrl+U</translation>
     </message>
     <message>
         <location filename="TextTempl.ui" line="195"/>
@@ -137,47 +133,57 @@
         <translation>Splaten hinzufügen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="207"/>
+        <location filename="TextTempl.ui" line="206"/>
         <source>Delete Column</source>
         <translation>Spalten löschen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="212"/>
+        <location filename="TextTempl.ui" line="214"/>
         <source>Load Data</source>
         <translation>Datendatei laden</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="141"/>
+        <location filename="TextTempl.ui" line="217"/>
+        <source>&amp;Load Data</source>
+        <translation>Datendatei &amp;laden</translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="220"/>
+        <source>Ctrl+L</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="145"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="20"/>
+        <location filename="TextTempl.ui" line="19"/>
         <source>TextTempl</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="95"/>
+        <location filename="TextTempl.ui" line="102"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="165"/>
+        <location filename="TextTempl.ui" line="167"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="168"/>
+        <location filename="TextTempl.ui" line="170"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="180"/>
+        <location filename="TextTempl.ui" line="181"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="183"/>
+        <location filename="TextTempl.ui" line="184"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>

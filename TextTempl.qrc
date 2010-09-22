@@ -1,14 +1,15 @@
 <RCC>
     <qresource prefix="/" >
-        <file>images/about.png</file>
-        <file>images/copy.png</file>
         <file>images/delete_table_col.png</file>
+        <file>images/editcopy.png</file>
+        <file>images/editpaste.png</file>
         <file>images/exit.png</file>
-        <file>images/help.png</file>
+        <file>images/fileclose.png</file>
+        <file>images/fileopen.png</file>
+        <file>images/fileopendata.png</file>
+        <file>images/filesave.png</file>
+        <file>images/info.png</file>
         <file>images/insert_table_col.png</file>
         <file>images/logo.png</file>
-        <file>images/open.png</file>
-        <file>images/paste.png</file>
-        <file>images/save.png</file>
     </qresource>
 </RCC>

@@ -23,6 +23,7 @@ MainApp::MainApp(QMainWindow *parent)
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
     this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
+    this->connect(this->actionClose,SIGNAL(triggered()),SLOT(closeFile()));
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
@@ -91,7 +92,9 @@ void MainApp::openFile()
 
             if(!fmap.empty()) {
                 this->tableWidget->setEnabled(true);
+                this->actionLoadData->setEnabled(true);
                 this->actionSave->setEnabled(true);
+                this->actionClose->setEnabled(true);
                 this->actionCopy->setEnabled(true);
                 this->actionPaste->setEnabled(true);
                 this->actionInsertCol->setEnabled(true);
@@ -99,7 +102,9 @@ void MainApp::openFile()
             }
             else {
                 this->tableWidget->setEnabled(false);
+                this->actionLoadData->setEnabled(false);
                 this->actionSave->setEnabled(false);
+                this->actionClose->setEnabled(false);
                 this->actionCopy->setEnabled(false);
                 this->actionPaste->setEnabled(false);
                 this->actionInsertCol->setEnabled(false);
@@ -178,6 +183,23 @@ void MainApp::saveFile()
             file->close();
         }
     }
+}
+
+/*
+ * private slot
+ */
+void MainApp::closeFile()
+{
+    this->resetTable();
+
+    this->tableWidget->setEnabled(false);
+    this->actionLoadData->setEnabled(false);
+    this->actionSave->setEnabled(false);
+    this->actionClose->setEnabled(false);
+    this->actionCopy->setEnabled(false);
+    this->actionPaste->setEnabled(false);
+    this->actionInsertCol->setEnabled(false);
+    this->actionDeleteCol->setEnabled(false);
 }
 
 QMap<QString, int> MainApp::buildTable(QString templ)
