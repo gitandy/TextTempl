@@ -73,16 +73,20 @@ void MainApp::openFile()
             tableWidget->resizeRowsToContents();
 
             if(!fmap.empty()) {
-                tableWidget->setEnabled(true);
-                actionSave->setEnabled(true);
-                actionCopy->setEnabled(true);
-                actionPaste->setEnabled(true);
+                this->tableWidget->setEnabled(true);
+                this->actionSave->setEnabled(true);
+                this->actionCopy->setEnabled(true);
+                this->actionPaste->setEnabled(true);
+                this->actionInsertCol->setEnabled(true);
+                this->actionDeleteCol->setEnabled(true);
             }
             else {
-                tableWidget->setEnabled(false);
-                actionSave->setEnabled(false);
-                actionCopy->setEnabled(false);
-                actionPaste->setEnabled(false);
+                this->tableWidget->setEnabled(false);
+                this->actionSave->setEnabled(false);
+                this->actionCopy->setEnabled(false);
+                this->actionPaste->setEnabled(false);
+                this->actionInsertCol->setEnabled(false);
+                this->actionDeleteCol->setEnabled(false);
 
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
@@ -194,7 +198,9 @@ void MainApp::insertCol()
  */
 void MainApp::deleteCol()
 {
-
+    if(this->tableWidget->columnCount() > 1) {
+        this->tableWidget->setColumnCount(this->tableWidget->columnCount() - 1);
+    }
 }
 
 /*
@@ -204,13 +210,24 @@ void MainApp::copyToClip()
 {
     QString clipText = "";
 
-    int rCount = tableWidget->rowCount();
-    for(int i = 0; i < rCount; i++){
-        QTableWidgetItem *item = tableWidget->item(i, 0);
-        clipText = clipText + item->text() + "\n";
+    for(int r = 0; r < this->tableWidget->rowCount(); r++){
+        for(int c = 0; c < this->tableWidget->columnCount(); c++){
+            QTableWidgetItem *item = this->tableWidget->item(r, c);
+            QString text = " ";
+            if(item != 0) {
+                text = item->text();
+            }
+            clipText += text;
+            if(c != this->tableWidget->columnCount() - 1) {
+                clipText += "\t";
+            }
+        }
+        if(r != this->tableWidget->rowCount() - 1) {
+           clipText += "\n";
+        }
     }
 
-    clipboard->setText(clipText);
+    this->clipboard->setText(clipText);
 }
 
 /*
@@ -218,14 +235,15 @@ void MainApp::copyToClip()
  */
 void MainApp::pasteFromClip()
 {
-    QString clipText = clipboard->text();
+    QStringList lineList = this->clipboard->text().split("\n");
 
-    QStringList clipList = clipText.split("\n");
+    for(int r = 0; r < lineList.size() && r < this->tableWidget->rowCount(); r++){
+        QStringList colList = lineList[r].split("\t");
 
-    int rCount = tableWidget->rowCount();
-    for(int i = 0; i < clipList.size() && i < rCount; i++){
-        QTableWidgetItem *item = tableWidget->item(i, 0);
-        item->setText(clipList[i].trimmed());
+        for(int c = 0; c < colList.size() && c < this->tableWidget->columnCount(); c++){
+            QTableWidgetItem *item = new QTableWidgetItem(colList[c].trimmed());
+            this->tableWidget->setItem(r, c , item);
+        }
     }
 }
 

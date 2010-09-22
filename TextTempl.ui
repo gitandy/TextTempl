@@ -152,6 +152,9 @@
    </property>
   </action>
   <action name="actionCopy">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
      <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
@@ -164,6 +167,9 @@
    </property>
   </action>
   <action name="actionPaste">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
      <normaloff>:/images/paste.png</normaloff>:/images/paste.png</iconset>
@@ -176,6 +182,9 @@
    </property>
   </action>
   <action name="actionInsertCol">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
      <normaloff>:/images/insert_table_col.png</normaloff>:/images/insert_table_col.png</iconset>
@@ -185,6 +194,9 @@
    </property>
   </action>
   <action name="actionDeleteCol">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="TextTempl.qrc">
      <normaloff>:/images/delete_table_col.png</normaloff>:/images/delete_table_col.png</iconset>
