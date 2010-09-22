@@ -113,11 +113,23 @@ void MainApp::saveFile()
 
             QString txt = templ;
 
+            int col = 0;
+            QList<QTableWidgetItem*> selList = this->tableWidget->selectedItems();
+            if(selList.size() > 0){
+                col = selList[0]->column();
+            }
+
             QMapIterator<QString, int> i(fmap);
             while (i.hasNext()) {
                 QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
 
-                txt.replace(QRegExp(repl), this->tableWidget->item(i.value(), 0)->text());
+                QTableWidgetItem *item = this->tableWidget->item(i.value(), col);
+                QString text = "";
+                if(item != 0) {
+                    text = item->text();
+                }
+
+                txt.replace(QRegExp(repl), text);
             }
 
             *ts << txt;
