@@ -145,7 +145,22 @@ void MainApp::openDataFile()
  */
 void MainApp::saveFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString(), tr("All Files") + " (*.*)");
+    int col = 0;
+    QList<QTableWidgetItem*> selList = this->tableWidget->selectedItems();
+    if(selList.size() > 0){
+        col = selList[0]->column();
+    }
+
+    QString fileDefault = "";
+
+    if(fmap.contains(tr("Name"))){
+        QTableWidgetItem *item = this->tableWidget->item(fmap.value(tr("Name")), col);
+        if(item != 0 && item->text().trimmed() != "") {
+            fileDefault = "/" + item->text() + ".txt";
+        }
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString() + fileDefault, tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         QFile *file = new QFile(fileName);
@@ -219,7 +234,7 @@ QMap<QString, int> MainApp::buildTable(QString templ)
             QTableWidgetItem *row = new QTableWidgetItem();
 
             QString param = pv[0];
-            row->setText(param + ":");
+            row->setText(param);
 
             QTableWidgetItem *cell = new QTableWidgetItem();
 
