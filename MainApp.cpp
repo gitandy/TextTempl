@@ -113,11 +113,11 @@ void MainApp::saveFile()
 
             QString txt = templ;
 
-            QMapIterator<QString, QTableWidgetItem*> i(fmap);
+            QMapIterator<QString, int> i(fmap);
             while (i.hasNext()) {
                 QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
 
-                txt.replace(QRegExp(repl), i.value()->text());
+                txt.replace(QRegExp(repl), this->tableWidget->item(i.value(), 0)->text());
             }
 
             *ts << txt;
@@ -127,11 +127,11 @@ void MainApp::saveFile()
     }
 }
 
-QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
+QMap<QString, int> MainApp::buildTable(QString templ)
 {
     this->resetTable();
 
-    QMap<QString,QTableWidgetItem*> fmap;
+    QMap<QString, int> fmap;
 
     QStringList clst = templ.split("$$");
 
@@ -153,7 +153,7 @@ QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
                 cell->setText(preVal);
             }
 
-            fmap.insert(pv[0], cell);
+            fmap.insert(pv[0], rowc);
 
             tableWidget->setRowCount(rowc + 1);
             tableWidget->setVerticalHeaderItem(rowc, row);

@@ -13,7 +13,7 @@ class MainApp
 
  public:
      MainApp(QMainWindow *parent = 0);
-     QMap<QString,  QTableWidgetItem*> fmap;
+     QMap<QString, int> fmap;
      QString templ;
 
  private slots: 
@@ -26,7 +26,7 @@ class MainApp
      void deleteCol();
 
  private:
-     QMap<QString, QTableWidgetItem*> buildTable(QString templ);
+     QMap<QString, int> buildTable(QString templ);
      void resetTable();
      QClipboard *clipboard;
 
