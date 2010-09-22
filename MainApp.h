@@ -21,6 +21,7 @@ class MainApp
 
  private slots: 
      void openFile();
+     void openDataFile();
      void saveFile();
      void showAbout();
      void copyToClip();
@@ -31,6 +32,8 @@ class MainApp
  private:
      QMap<QString, int> buildTable(QString templ);
      void resetTable();
+     void fillTable(QString text, QString colSep);
+
      QClipboard *clipboard;
 
      QSettings *settings;

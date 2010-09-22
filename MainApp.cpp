@@ -21,6 +21,7 @@ MainApp::MainApp(QMainWindow *parent)
     clipboard = QApplication::clipboard();
 
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
+    this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
@@ -47,6 +48,10 @@ MainApp::MainApp(QMainWindow *parent)
 
     if(!this->settings->contains("openpath")) {
         this->settings->setValue("openpath", QDir::homePath());
+    }
+
+    if(!this->settings->contains("datapath")) {
+        this->settings->setValue("datapath", QDir::homePath());
     }
 
     if(!this->settings->contains("savepath")) {
@@ -102,6 +107,30 @@ void MainApp::openFile()
 
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
+        }
+    }
+}
+
+/*
+ * private slot
+ */
+void MainApp::openDataFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Load data file"), this->settings->value("datapath").toString(), tr("CSV-File") + " (*.csv);;" + tr("All Files") + " (*.*)");
+
+    if(fileName != "") {
+        QFile *dataFile = new QFile(fileName);
+        if(!dataFile->open(QIODevice::ReadOnly))
+            QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + dataFile->errorString());
+        else {
+            int posLastSep = fileName.lastIndexOf('/', -1);
+            this->settings->setValue("datapath", fileName.left(posLastSep));
+
+            QTextStream *ts = new QTextStream(dataFile);
+            QString data = ts->readAll();
+            dataFile->close();
+
+            this->fillTable(data.replace("\"", ""), ";");
         }
     }
 }
@@ -259,10 +288,15 @@ void MainApp::copyToClip()
  */
 void MainApp::pasteFromClip()
 {
-    QStringList lineList = this->clipboard->text().split("\n");
+    this->fillTable(this->clipboard->text(), "\t");
+}
+
+void MainApp::fillTable(QString text, QString colSep)
+{
+    QStringList lineList = text.split("\n");
 
     for(int r = 0; r < lineList.size() && r < this->tableWidget->rowCount(); r++){
-        QStringList colList = lineList[r].split("\t");
+        QStringList colList = lineList[r].split(colSep);
 
         for(int c = 0; c < colList.size(); c++){
             if(c == this->tableWidget->columnCount()) {
