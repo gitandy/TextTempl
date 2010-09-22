@@ -85,10 +85,11 @@
      <string>&amp;File</string>
     </property>
     <addaction name="actionOpen" />
-    <addaction name="actionLoadData" />
-    <addaction name="separator" />
     <addaction name="actionSave" />
     <addaction name="actionSaveAll" />
+    <addaction name="separator" />
+    <addaction name="actionLoadData" />
+    <addaction name="actionSaveData" />
     <addaction name="separator" />
     <addaction name="actionClose" />
     <addaction name="separator" />
@@ -249,6 +250,17 @@
    </property>
    <property name="text" >
     <string>Save All</string>
+   </property>
+  </action>
+  <action name="actionSaveData" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="TextTempl.qrc" >:/images/filesavedata.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Save Data</string>
    </property>
   </action>
  </widget>

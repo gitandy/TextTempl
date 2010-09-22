@@ -21,9 +21,10 @@ MainApp::MainApp(QMainWindow *parent)
     clipboard = QApplication::clipboard();
 
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
-    this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
     this->connect(this->actionSaveAll,SIGNAL(triggered()),SLOT(saveAll()));
+    this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
+    this->connect(this->actionSaveData,SIGNAL(triggered()),SLOT(saveDataFile()));
     this->connect(this->actionClose,SIGNAL(triggered()),SLOT(closeFile()));
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
@@ -93,9 +94,10 @@ void MainApp::openFile()
 
             if(!fmap.empty()) {
                 this->tableWidget->setEnabled(true);
-                this->actionLoadData->setEnabled(true);
                 this->actionSave->setEnabled(true);
                 this->actionSaveAll->setEnabled(true);
+                this->actionLoadData->setEnabled(true);
+                this->actionSaveData->setEnabled(true);
                 this->actionClose->setEnabled(true);
                 this->actionCopy->setEnabled(true);
                 this->actionPaste->setEnabled(true);
@@ -104,9 +106,10 @@ void MainApp::openFile()
             }
             else {
                 this->tableWidget->setEnabled(false);
-                this->actionLoadData->setEnabled(false);
                 this->actionSave->setEnabled(false);
                 this->actionSaveAll->setEnabled(false);
+                this->actionLoadData->setEnabled(false);
+                this->actionSaveData->setEnabled(false);
                 this->actionClose->setEnabled(false);
                 this->actionCopy->setEnabled(false);
                 this->actionPaste->setEnabled(false);
@@ -139,6 +142,30 @@ void MainApp::openDataFile()
             dataFile->close();
 
             this->fillTable(data.replace("\"", ""), ";");
+        }
+    }
+}
+
+/*
+ * private slot
+ */
+void MainApp::saveDataFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save data file"), this->settings->value("datapath").toString(), tr("CSV-File") + " (*.csv);;" + tr("All Files") + " (*.*)");
+
+    if(fileName != "") {
+        QFile *file = new QFile(fileName);
+        if(!file->open(QIODevice::WriteOnly))
+            QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
+        else {
+            int posLastSep = fileName.lastIndexOf('/', -1);
+            this->settings->setValue("datapath", fileName.left(posLastSep));
+
+            QTextStream *ts = new QTextStream(file);
+
+            *ts << this->retrieveTable(";");
+            ts->flush();
+            file->close();
         }
     }
 }
@@ -238,9 +265,10 @@ void MainApp::closeFile()
     this->resetTable();
 
     this->tableWidget->setEnabled(false);
-    this->actionLoadData->setEnabled(false);
     this->actionSave->setEnabled(false);
     this->actionSaveAll->setEnabled(false);
+    this->actionLoadData->setEnabled(false);
+    this->actionSaveData->setEnabled(false);
     this->actionClose->setEnabled(false);
     this->actionCopy->setEnabled(false);
     this->actionPaste->setEnabled(false);
@@ -329,7 +357,12 @@ void MainApp::deleteCol()
  */
 void MainApp::copyToClip()
 {
-    QString clipText = "";
+    this->clipboard->setText(this->retrieveTable("\t"));
+}
+
+QString MainApp::retrieveTable(QString sep)
+{
+    QString data = "";
 
     for(int r = 0; r < this->tableWidget->rowCount(); r++){
         for(int c = 0; c < this->tableWidget->columnCount(); c++){
@@ -338,17 +371,17 @@ void MainApp::copyToClip()
             if(item != 0) {
                 text = item->text();
             }
-            clipText += text;
+            data += text;
             if(c != this->tableWidget->columnCount() - 1) {
-                clipText += "\t";
+                data += sep;
             }
         }
         if(r != this->tableWidget->rowCount() - 1) {
-           clipText += "\n";
+           data += "\n";
         }
     }
 
-    this->clipboard->setText(clipText);
+    return data;
 }
 
 /*
