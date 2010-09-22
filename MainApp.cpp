@@ -27,6 +27,9 @@ MainApp::MainApp(QMainWindow *parent)
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
     this->connect(this->actionPaste,SIGNAL(triggered()),SLOT(pasteFromClip()));
 
+    this->connect(this->actionInsertCol,SIGNAL(triggered()),SLOT(insertCol()));
+    this->connect(this->actionDeleteCol,SIGNAL(triggered()),SLOT(deleteCol()));
+
     this->resetTable();
 
     tableWidget->resizeRowsToContents();
@@ -58,6 +61,9 @@ MainApp::~MainApp()
     this->settings->sync();
 }
 
+/*
+ * private slot
+ */
 void MainApp::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->settings->value("openpath").toString(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
@@ -79,16 +85,20 @@ void MainApp::openFile()
             tableWidget->resizeRowsToContents();
 
             if(!fmap.empty()) {
-                tableWidget->setEnabled(true);
-                actionSave->setEnabled(true);
-                actionCopy->setEnabled(true);
-                actionPaste->setEnabled(true);
+                this->tableWidget->setEnabled(true);
+                this->actionSave->setEnabled(true);
+                this->actionCopy->setEnabled(true);
+                this->actionPaste->setEnabled(true);
+                this->actionInsertCol->setEnabled(true);
+                this->actionDeleteCol->setEnabled(true);
             }
             else {
-                tableWidget->setEnabled(false);
-                actionSave->setEnabled(false);
-                actionCopy->setEnabled(false);
-                actionPaste->setEnabled(false);
+                this->tableWidget->setEnabled(false);
+                this->actionSave->setEnabled(false);
+                this->actionCopy->setEnabled(false);
+                this->actionPaste->setEnabled(false);
+                this->actionInsertCol->setEnabled(false);
+                this->actionDeleteCol->setEnabled(false);
 
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
@@ -96,6 +106,9 @@ void MainApp::openFile()
     }
 }
 
+/*
+ * private slot
+ */
 void MainApp::saveFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString(), tr("All Files") + " (*.*)");
@@ -112,11 +125,23 @@ void MainApp::saveFile()
 
             QString txt = templ;
 
-            QMapIterator<QString, QTableWidgetItem*> i(fmap);
+            int col = 0;
+            QList<QTableWidgetItem*> selList = this->tableWidget->selectedItems();
+            if(selList.size() > 0){
+                col = selList[0]->column();
+            }
+
+            QMapIterator<QString, int> i(fmap);
             while (i.hasNext()) {
                 QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
 
-                txt.replace(QRegExp(repl), i.value()->text());
+                QTableWidgetItem *item = this->tableWidget->item(i.value(), col);
+                QString text = "";
+                if(item != 0) {
+                    text = item->text();
+                }
+
+                txt.replace(QRegExp(repl), text);
             }
 
             *ts << txt;
@@ -126,11 +151,11 @@ void MainApp::saveFile()
     }
 }
 
-QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
+QMap<QString, int> MainApp::buildTable(QString templ)
 {
     this->resetTable();
 
-    QMap<QString,QTableWidgetItem*> fmap;
+    QMap<QString, int> fmap;
 
     QStringList clst = templ.split("$$");
 
@@ -152,7 +177,7 @@ QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
                 cell->setText(preVal);
             }
 
-            fmap.insert(pv[0], cell);
+            fmap.insert(pv[0], rowc);
 
             tableWidget->setRowCount(rowc + 1);
             tableWidget->setVerticalHeaderItem(rowc, row);
@@ -165,18 +190,15 @@ QMap<QString,QTableWidgetItem*> MainApp::buildTable(QString templ)
     return fmap;
 }
 
+/*
+ * private slot
+ */
 void MainApp::resetTable() 
 {
     tableWidget->clear();
 
     tableWidget->setRowCount(1);
     tableWidget->setColumnCount(1);
-
-    QTableWidgetItem *__colItem = new QTableWidgetItem();
-    __colItem->setText(QApplication::translate("MainWindow", "Content", 0, QApplication::UnicodeUTF8));
-    tableWidget->setHorizontalHeaderItem(0, __colItem);
-    if (tableWidget->rowCount() < 1)
-        tableWidget->setRowCount(1);
 
     QTableWidgetItem *__rowItem = new QTableWidgetItem();
     __rowItem->setText(QApplication::translate("MainWindow", "Parameter", 0, QApplication::UnicodeUTF8));
@@ -187,32 +209,74 @@ void MainApp::resetTable()
     tableWidget->setItem(0, 0, __item);
 }
 
+/*
+ * private slot
+ */
+void MainApp::insertCol()
+{
+    this->tableWidget->setColumnCount(this->tableWidget->columnCount() + 1);
+}
+
+/*
+ * private slot
+ */
+void MainApp::deleteCol()
+{
+    if(this->tableWidget->columnCount() > 1) {
+        this->tableWidget->setColumnCount(this->tableWidget->columnCount() - 1);
+    }
+}
+
+/*
+ * private slot
+ */
 void MainApp::copyToClip()
 {
     QString clipText = "";
 
-    int rCount = tableWidget->rowCount();
-    for(int i = 0; i < rCount; i++){
-        QTableWidgetItem *item = tableWidget->item(i, 0);
-        clipText = clipText + item->text() + "\n";
+    for(int r = 0; r < this->tableWidget->rowCount(); r++){
+        for(int c = 0; c < this->tableWidget->columnCount(); c++){
+            QTableWidgetItem *item = this->tableWidget->item(r, c);
+            QString text = " ";
+            if(item != 0) {
+                text = item->text();
+            }
+            clipText += text;
+            if(c != this->tableWidget->columnCount() - 1) {
+                clipText += "\t";
+            }
+        }
+        if(r != this->tableWidget->rowCount() - 1) {
+           clipText += "\n";
+        }
     }
 
-    clipboard->setText(clipText);
+    this->clipboard->setText(clipText);
 }
 
+/*
+ * private slot
+ */
 void MainApp::pasteFromClip()
 {
-    QString clipText = clipboard->text();
+    QStringList lineList = this->clipboard->text().split("\n");
 
-    QStringList clipList = clipText.split("\n");
+    for(int r = 0; r < lineList.size() && r < this->tableWidget->rowCount(); r++){
+        QStringList colList = lineList[r].split("\t");
 
-    int rCount = tableWidget->rowCount();
-    for(int i = 0; i < clipList.size() && i < rCount; i++){
-        QTableWidgetItem *item = tableWidget->item(i, 0);
-        item->setText(clipList[i].trimmed());
+        for(int c = 0; c < colList.size(); c++){
+            if(c == this->tableWidget->columnCount()) {
+                this->tableWidget->setColumnCount(c + 1);
+            }
+            QTableWidgetItem *item = new QTableWidgetItem(colList[c].trimmed());
+            this->tableWidget->setItem(r, c , item);
+        }
     }
 }
 
+/*
+ * private slot
+ */
 void MainApp::showAbout()
 {
     QString modified = "";

@@ -15,8 +15,8 @@ class MainApp
  public:
      MainApp(QMainWindow *parent = 0);
      virtual ~MainApp();
+     QMap<QString, int> fmap;
 
-     QMap<QString,  QTableWidgetItem*> fmap;
      QString templ;
 
  private slots: 
@@ -25,9 +25,11 @@ class MainApp
      void showAbout();
      void copyToClip();
      void pasteFromClip();
+     void insertCol();
+     void deleteCol();
 
  private:
-     QMap<QString, QTableWidgetItem*> buildTable(QString templ);
+     QMap<QString, int> buildTable(QString templ);
      void resetTable();
      QClipboard *clipboard;
 

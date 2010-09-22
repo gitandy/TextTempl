@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,173 +10,204 @@
     <height>347</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>282</width>
     <height>344</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>TextTempl</string>
   </property>
-  <property name="windowIcon" >
-   <iconset>images/logo.png</iconset>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/logo.png</normaloff>images/logo.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <property name="sizePolicy" >
-    <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" >
-    <property name="spacing" >
+   <layout class="QHBoxLayout">
+    <property name="spacing">
      <number>6</number>
     </property>
-    <property name="leftMargin" >
-     <number>9</number>
-    </property>
-    <property name="topMargin" >
-     <number>9</number>
-    </property>
-    <property name="rightMargin" >
-     <number>9</number>
-    </property>
-    <property name="bottomMargin" >
+    <property name="margin">
      <number>9</number>
     </property>
     <item>
-     <widget class="QTableWidget" name="tableWidget" >
-      <property name="minimumSize" >
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="minimumSize">
        <size>
         <width>261</width>
         <height>291</height>
        </size>
       </property>
-      <property name="editTriggers" >
-       <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::NoEditTriggers</set>
+      <property name="editTriggers">
+       <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
       </property>
-      <property name="selectionMode" >
-       <enum>QAbstractItemView::NoSelection</enum>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
       </property>
-      <property name="selectionBehavior" >
-       <enum>QAbstractItemView::SelectItems</enum>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectColumns</enum>
       </property>
-      <property name="rowCount" >
+      <property name="rowCount">
        <number>0</number>
       </property>
-      <property name="columnCount" >
+      <property name="columnCount">
        <number>0</number>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>282</width>
-     <height>19</height>
+     <height>18</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile" >
-    <property name="title" >
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionOpen" />
-    <addaction name="actionSave" />
-    <addaction name="separator" />
-    <addaction name="actionExit" />
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuHelp" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout" />
+    <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuEdit" >
-    <property name="title" >
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionCopy" />
-    <addaction name="actionPaste" />
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionInsertCol"/>
+    <addaction name="actionDeleteCol"/>
    </widget>
-   <addaction name="menuFile" />
-   <addaction name="menuEdit" />
-   <addaction name="menuHelp" />
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
-  <action name="actionOpen" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/open.png</iconset>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;Open</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSave" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/save.png</iconset>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;Save</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionExit" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/exit.png</iconset>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/exit.png</normaloff>:/images/exit.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>E&amp;xit</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionAbout" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/about.png</iconset>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/about.png</normaloff>:/images/about.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;About</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+A</string>
    </property>
   </action>
-  <action name="actionCopy" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/copy.png</iconset>
+  <action name="actionCopy">
+   <property name="enabled">
+    <bool>false</bool>
    </property>
-   <property name="text" >
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
+   </property>
+   <property name="text">
     <string>Copy</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+C</string>
    </property>
   </action>
-  <action name="actionPaste" >
-   <property name="icon" >
-    <iconset resource="TextTempl.qrc" >:/images/paste.png</iconset>
+  <action name="actionPaste">
+   <property name="enabled">
+    <bool>false</bool>
    </property>
-   <property name="text" >
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/paste.png</normaloff>:/images/paste.png</iconset>
+   </property>
+   <property name="text">
     <string>Paste</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionInsertCol">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/insert_table_col.png</normaloff>:/images/insert_table_col.png</iconset>
+   </property>
+   <property name="text">
+    <string>Insert Column</string>
+   </property>
+  </action>
+  <action name="actionDeleteCol">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="TextTempl.qrc">
+     <normaloff>:/images/delete_table_col.png</normaloff>:/images/delete_table_col.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Column</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="TextTempl.qrc" />
+  <include location="TextTempl.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -184,11 +216,11 @@
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>215</x>
      <y>219</y>
     </hint>
@@ -200,11 +232,11 @@
    <receiver>tableWidget</receiver>
    <slot>resizeColumnsToContents()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>140</x>
      <y>174</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>140</x>
      <y>174</y>
     </hint>

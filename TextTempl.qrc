@@ -2,8 +2,10 @@
     <qresource prefix="/" >
         <file>images/about.png</file>
         <file>images/copy.png</file>
+        <file>images/delete_table_col.png</file>
         <file>images/exit.png</file>
         <file>images/help.png</file>
+        <file>images/insert_table_col.png</file>
         <file>images/logo.png</file>
         <file>images/open.png</file>
         <file>images/paste.png</file>
