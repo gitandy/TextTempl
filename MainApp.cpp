@@ -292,6 +292,7 @@ void MainApp::buildTable(QString templ)
 
     this->fieldsMap.clear();
     this->defaultsMap.clear();
+    this->typeMap.clear();
 
     QStringList clst = templ.split("$$");
 
@@ -320,6 +321,11 @@ void MainApp::buildTable(QString templ)
             }
 
             this->defaultsMap.insert(rowc, preVal);
+            if(preVal.contains("::")) {
+                this->typeMap.insert(rowc, CT_COMBOBOX);
+            } else {
+                this->typeMap.insert(rowc, CT_LINEEDIT);
+            }
 
             rowc++;
         }
@@ -450,9 +456,25 @@ void MainApp::showAbout()
  */
 void MainApp::setCell(int row, int col, QString text)
 {
-    QWidget *cell = (QWidget *)new QLineEdit();;
-    ((QLineEdit *)cell)->setFrame(false);
-    ((QLineEdit *)cell)->setText(text);
+    QWidget *cell;
+
+    if(this->typeMap.value(row) == CT_COMBOBOX) {
+        cell = (QWidget *)new QComboBox();;
+        ((QComboBox *)cell)->setFrame(false);
+        ((QComboBox *)cell)->addItems(this->defaultsMap.value(row).split("::"));
+
+        if(this->defaultsMap.value(row).trimmed().endsWith("::")) {
+            ((QComboBox *)cell)->setEditable(true);;
+        }
+
+        if(int i = ((QComboBox *)cell)->findText(text) > 0) {
+            ((QComboBox *)cell)->setCurrentIndex(i);
+        }
+    } else {
+        cell = (QWidget *)new QLineEdit();;
+        ((QLineEdit *)cell)->setFrame(false);
+        ((QLineEdit *)cell)->setText(text);
+    }
 
     this->tableWidget->setCellWidget(row, col, cell);
 }
@@ -469,6 +491,8 @@ QString MainApp::cellText(int row, int col)
     if(cell != 0) {
         if(cell->inherits(QLineEdit::staticMetaObject.className())) {
             text = ((QLineEdit *)cell)->text();
+        } else if(cell->inherits(QComboBox::staticMetaObject.className())) {
+            text = ((QComboBox *)cell)->currentText();
         }
     }
 
