@@ -225,7 +225,7 @@ void MainApp::writeFile(QString fileName, int col)
     else {
         QTextStream *ts = new QTextStream(file);
 
-        QString txt = templ;
+        QString txt = templ.remove("$$" + tr("Name") + "@***$$").trimmed();
 
         QMapIterator<QString, int> i(fmap);
         while (i.hasNext()) {
