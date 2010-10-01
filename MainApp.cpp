@@ -141,7 +141,13 @@ void MainApp::openDataFile()
             QString data = ts->readAll();
             dataFile->close();
 
-            this->fillTable(data.replace("\"", ""), ";");
+            QString sep = ";";
+
+            if(this->settings->contains("csv_sep")) {
+                sep = this->settings->value("csv_sep").toString();
+            }
+
+            this->fillTable(data.replace("\"", ""), sep);
         }
     }
 }
@@ -163,7 +169,18 @@ void MainApp::saveDataFile()
 
             QTextStream *ts = new QTextStream(file);
 
-            *ts << this->retrieveTable(";");
+            QString sep = ";";
+
+            if(this->settings->contains("csv_sep")) {
+                sep = this->settings->value("csv_sep").toString();
+            }
+
+            if(this->settings->contains("csv_quote") && this->settings->value("csv_quote").toBool()) {
+                *ts << "\"" << this->retrieveTable("\"" + sep + "\"").replace("\n", "\"\n\"") << "\"";
+            } else {
+                *ts << this->retrieveTable(sep);
+            }
+
             ts->flush();
             file->close();
         }
