@@ -18,14 +18,18 @@ MainApp::MainApp(QMainWindow *parent)
 {
     setupUi(this);
 
-    clipboard = QApplication::clipboard();
+    this->clipboard = QApplication::clipboard();
 
+    //Menu
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
     this->connect(this->actionSaveAll,SIGNAL(triggered()),SLOT(saveAll()));
+
     this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSaveData,SIGNAL(triggered()),SLOT(saveDataFile()));
+
     this->connect(this->actionClose,SIGNAL(triggered()),SLOT(closeFile()));
+
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
@@ -34,17 +38,27 @@ MainApp::MainApp(QMainWindow *parent)
     this->connect(this->actionInsertCol,SIGNAL(triggered()),SLOT(insertCol()));
     this->connect(this->actionDeleteCol,SIGNAL(triggered()),SLOT(deleteCol()));
 
+    //Toolbar
+    this->connect(this->actionOpen_TB,SIGNAL(triggered()),SLOT(openFile()));
+    this->connect(this->actionSave_TB,SIGNAL(triggered()),SLOT(saveFile()));
+    this->connect(this->actionSaveAll_TB,SIGNAL(triggered()),SLOT(saveAll()));
+
+    this->connect(this->actionLoadData_TB,SIGNAL(triggered()),SLOT(openDataFile()));
+
+    this->connect(this->actionCopy_TB,SIGNAL(triggered()),SLOT(copyToClip()));
+    this->connect(this->actionPaste_TB,SIGNAL(triggered()),SLOT(pasteFromClip()));
+
+    this->connect(this->actionInsertCol_TB,SIGNAL(triggered()),SLOT(insertCol()));
+    this->connect(this->actionDeleteCol_TB,SIGNAL(triggered()),SLOT(deleteCol()));
+
     this->resetTable();
 
-    tableWidget->resizeRowsToContents();
-    tableWidget->resizeColumnsToContents();
+    this->tableWidget->resizeRowsToContents();
+    this->tableWidget->resizeColumnsToContents();
 
-    tableWidget->setEnabled(false);
-    actionSave->setEnabled(false);
-    actionCopy->setEnabled(false);
-    actionPaste->setEnabled(false);
+    this->tableWidget->setEnabled(false);
 
-    templ = "";
+    this->templ = "";
 
     //Settings
     this->settings = new QSettings("schawo.de", "TextTempl");
@@ -103,18 +117,17 @@ void MainApp::openFile()
                 this->actionPaste->setEnabled(true);
                 this->actionInsertCol->setEnabled(true);
                 this->actionDeleteCol->setEnabled(true);
+
+                this->actionSave_TB->setEnabled(true);
+                this->actionSaveAll_TB->setEnabled(true);
+                this->actionLoadData_TB->setEnabled(true);
+                this->actionCopy_TB->setEnabled(true);
+                this->actionPaste_TB->setEnabled(true);
+                this->actionInsertCol_TB->setEnabled(true);
+                this->actionDeleteCol_TB->setEnabled(true);
             }
             else {
-                this->tableWidget->setEnabled(false);
-                this->actionSave->setEnabled(false);
-                this->actionSaveAll->setEnabled(false);
-                this->actionLoadData->setEnabled(false);
-                this->actionSaveData->setEnabled(false);
-                this->actionClose->setEnabled(false);
-                this->actionCopy->setEnabled(false);
-                this->actionPaste->setEnabled(false);
-                this->actionInsertCol->setEnabled(false);
-                this->actionDeleteCol->setEnabled(false);
+                this->setClosedState();
 
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
@@ -281,6 +294,11 @@ void MainApp::closeFile()
 {
     this->resetTable();
 
+    this->setClosedState();
+}
+
+void MainApp::setClosedState()
+{
     this->tableWidget->setEnabled(false);
     this->actionSave->setEnabled(false);
     this->actionSaveAll->setEnabled(false);
@@ -291,6 +309,14 @@ void MainApp::closeFile()
     this->actionPaste->setEnabled(false);
     this->actionInsertCol->setEnabled(false);
     this->actionDeleteCol->setEnabled(false);
+
+    this->actionSave_TB->setEnabled(false);
+    this->actionSaveAll_TB->setEnabled(false);
+    this->actionLoadData_TB->setEnabled(false);
+    this->actionCopy_TB->setEnabled(false);
+    this->actionPaste_TB->setEnabled(false);
+    this->actionInsertCol_TB->setEnabled(false);
+    this->actionDeleteCol_TB->setEnabled(false);
 }
 
 QMap<QString, int> MainApp::buildTable(QString templ)

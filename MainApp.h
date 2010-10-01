@@ -38,6 +38,7 @@ class MainApp
      void resetTable();
      void fillTable(QString text, QString colSep);
      QString retrieveTable(QString sep);
+     void setClosedState();
 
      QClipboard *clipboard;
 
