@@ -15,9 +15,6 @@ class MainApp
  public:
      MainApp(QMainWindow *parent = 0);
      virtual ~MainApp();
-     QMap<QString, int> fmap;
-
-     QString templ;
 
  private slots: 
      void openFile();
@@ -33,12 +30,19 @@ class MainApp
      void deleteCol();
 
  private:
+     QMap<QString, int> fieldsMap;
+     QMap<int, QString> defaultsMap;
+
+     QString templ;
+
      void writeFile(QString fileName, int col);
-     QMap<QString, int> buildTable(QString templ);
+     void buildTable(QString templ);
+     void fillDefaults(int col);
      void resetTable();
      void fillTable(QString text, QString colSep);
      QString retrieveTable(QString sep);
-
+     void setCell(int row, int col, QString text);
+     QString cellText(int row, int col);
      QClipboard *clipboard;
 
      QSettings *settings;

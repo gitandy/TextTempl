@@ -8,6 +8,9 @@
 #include <QIODevice>
 #include <QTextStream>
 #include <QSettings>
+#include <QWidget>
+#include <QLineEdit>
+#include <QComboBox>
 
 #include "MainApp.h"
 
@@ -88,11 +91,11 @@ void MainApp::openFile()
             templ = ts->readAll();
             templFile->close();
 
-            fmap = buildTable(templ);
+            this->buildTable(templ);
 
             tableWidget->resizeRowsToContents();
 
-            if(!fmap.empty()) {
+            if(!this->fieldsMap.empty()) {
                 this->tableWidget->setEnabled(true);
                 this->actionSave->setEnabled(true);
                 this->actionSaveAll->setEnabled(true);
@@ -192,18 +195,15 @@ void MainApp::saveDataFile()
  */
 void MainApp::saveFile()
 {
-    int col = 0;
-    QList<QTableWidgetItem*> selList = this->tableWidget->selectedItems();
-    if(selList.size() > 0){
-        col = selList[0]->column();
-    }
+    int col = this->tableWidget->currentColumn();
 
     QString fileDefault = "";
 
-    if(fmap.contains(tr("Name"))){
-        QTableWidgetItem *item = this->tableWidget->item(fmap.value(tr("Name")), col);
-        if(item != 0 && item->text().trimmed() != "") {
-            fileDefault = "/" + item->text() + ".txt";
+    if(fieldsMap.contains(tr("Name"))){
+        QString text = this->cellText(fieldsMap.value(tr("Name")), col);
+
+        if(text.trimmed() != "") {
+            fileDefault = "/" + text + ".txt";
         }
     }
 
@@ -227,15 +227,11 @@ void MainApp::writeFile(QString fileName, int col)
 
         QString txt = templ.remove("$$" + tr("Name") + "@***$$").trimmed();
 
-        QMapIterator<QString, int> i(fmap);
+        QMapIterator<QString, int> i(fieldsMap);
         while (i.hasNext()) {
             QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
 
-            QTableWidgetItem *item = this->tableWidget->item(i.value(), col);
-            QString text = "";
-            if(item != 0) {
-                text = item->text();
-            }
+            QString text = this->cellText(i.value(), col);
 
             txt.replace(QRegExp(repl), text);
         }
@@ -257,15 +253,12 @@ void MainApp::saveAll()
 
     for(int c = 0; c < this->tableWidget->columnCount(); c++) {
         QString fileName = "";
-        if(fmap.contains(tr("Name"))){
-            QTableWidgetItem *item = this->tableWidget->item(fmap.value(tr("Name")), c);
-            if(item != 0 && item->text().trimmed() != "") {
-                fileName = item->text();
-            }
+        if(fieldsMap.contains(tr("Name"))){
+            fileName = this->cellText(fieldsMap.value(tr("Name")), c);
         }
 
         if(fileName == "") {
-            fileName = tr("unnamed") + "_" + QString::number(c);
+            fileName = tr("unnamed") + "_" + QString::number(c + 1);
         }
 
         fileName = dirName + "/" + fileName + ".txt";
@@ -293,11 +286,12 @@ void MainApp::closeFile()
     this->actionDeleteCol->setEnabled(false);
 }
 
-QMap<QString, int> MainApp::buildTable(QString templ)
+void MainApp::buildTable(QString templ)
 {
     this->resetTable();
 
-    QMap<QString, int> fmap;
+    this->fieldsMap.clear();
+    this->defaultsMap.clear();
 
     QStringList clst = templ.split("$$");
 
@@ -306,30 +300,39 @@ QMap<QString, int> MainApp::buildTable(QString templ)
     for (int i = 1; i < clst.size(); i += 2) {
         QStringList pv = clst[i].split("@");
 
-        if(!fmap.contains(pv[0])) {
+        if(!fieldsMap.contains(pv[0])) {
+            //Header
             QTableWidgetItem *row = new QTableWidgetItem();
 
             QString param = pv[0];
             row->setText(param);
 
-            QTableWidgetItem *cell = new QTableWidgetItem();
-
-            if(pv.size() > 0) {
-                QString preVal = pv[1];
-                cell->setText(preVal);
-            }
-
-            fmap.insert(pv[0], rowc);
+            fieldsMap.insert(pv[0], rowc);
 
             tableWidget->setRowCount(rowc + 1);
             tableWidget->setVerticalHeaderItem(rowc, row);
-            tableWidget->setItem(rowc, 0, cell);
+
+            //Content
+            QString preVal = "";
+
+            if(pv.size() > 0) {
+                preVal = pv[1];
+            }
+
+            this->defaultsMap.insert(rowc, preVal);
 
             rowc++;
         }
     }
 
-    return fmap;
+    this->fillDefaults(0);
+}
+
+void MainApp::fillDefaults(int col)
+{
+    for(int row = 0; row < this->tableWidget->rowCount(); row++) {
+        this->setCell(row, col, this->defaultsMap.value(row));
+    }
 }
 
 /*
@@ -346,9 +349,10 @@ void MainApp::resetTable()
     __rowItem->setText(QApplication::translate("MainWindow", "Parameter", 0, QApplication::UnicodeUTF8));
     tableWidget->setVerticalHeaderItem(0, __rowItem);
 
-    QTableWidgetItem *__item = new QTableWidgetItem();
+    QLineEdit *__item = new QLineEdit();
+    __item->setFrame(false);
     __item->setText(QApplication::translate("MainWindow", "Value", 0, QApplication::UnicodeUTF8));
-    tableWidget->setItem(0, 0, __item);
+    tableWidget->setCellWidget(0, 0, __item);
 }
 
 /*
@@ -357,6 +361,7 @@ void MainApp::resetTable()
 void MainApp::insertCol()
 {
     this->tableWidget->setColumnCount(this->tableWidget->columnCount() + 1);
+    this->fillDefaults(this->tableWidget->columnCount() - 1);
 }
 
 /*
@@ -383,12 +388,7 @@ QString MainApp::retrieveTable(QString sep)
 
     for(int r = 0; r < this->tableWidget->rowCount(); r++){
         for(int c = 0; c < this->tableWidget->columnCount(); c++){
-            QTableWidgetItem *item = this->tableWidget->item(r, c);
-            QString text = " ";
-            if(item != 0) {
-                text = item->text();
-            }
-            data += text;
+            data += this->cellText(r, c);
             if(c != this->tableWidget->columnCount() - 1) {
                 data += sep;
             }
@@ -420,8 +420,7 @@ void MainApp::fillTable(QString text, QString colSep)
             if(c == this->tableWidget->columnCount()) {
                 this->tableWidget->setColumnCount(c + 1);
             }
-            QTableWidgetItem *item = new QTableWidgetItem(colList[c].trimmed());
-            this->tableWidget->setItem(r, c , item);
+            this->setCell(r, c, colList[c].trimmed());
         }
     }
 }
@@ -444,4 +443,34 @@ void MainApp::showAbout()
 #endif
 
     QMessageBox::information(this, tr("About"), "(c) 2010 A. Schawo\n\n" + tr("TextTempl") + "\nVersion: " + QString(VERSION) + modified + debug);
+}
+
+/*
+ * private
+ */
+void MainApp::setCell(int row, int col, QString text)
+{
+    QWidget *cell = (QWidget *)new QLineEdit();;
+    ((QLineEdit *)cell)->setFrame(false);
+    ((QLineEdit *)cell)->setText(text);
+
+    this->tableWidget->setCellWidget(row, col, cell);
+}
+
+/*
+ * private
+ */
+QString MainApp::cellText(int row, int col)
+{
+    QWidget *cell = this->tableWidget->cellWidget(row, col);
+
+    QString text = "";
+
+    if(cell != 0) {
+        if(cell->inherits(QLineEdit::staticMetaObject.className())) {
+            text = ((QLineEdit *)cell)->text();
+        }
+    }
+
+    return text;
 }
