@@ -59,8 +59,6 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     this->tableWidget->resizeRowsToContents();
     this->tableWidget->resizeColumnsToContents();
 
-    this->tableWidget->setEnabled(false);
-
     this->templ = "";
 
     //Settings
@@ -79,6 +77,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     }
 
     this->settings->sync();
+
+    this->highlighter = new Highlighter(this->templateTextEdit->document());
 
     if(fileName != "") {
         this->openFileString(fileName);
@@ -117,6 +117,7 @@ void MainApp::openFileString(QString fileName)
             templFile->close();
 
             this->buildTable(templ);
+            this->templateTextEdit->setPlainText(templ);
 
             tableWidget->resizeRowsToContents();
 
@@ -139,6 +140,9 @@ void MainApp::openFileString(QString fileName)
                 this->actionPaste_TB->setEnabled(true);
                 this->actionInsertCol_TB->setEnabled(true);
                 this->actionDeleteCol_TB->setEnabled(true);
+
+                this->tableWidget->setEnabled(true);
+                this->templateTextEdit->setEnabled(true);
             }
             else {
                 this->setClosedState();
@@ -296,6 +300,7 @@ void MainApp::saveAll()
 void MainApp::closeFile()
 {
     this->resetTable();
+    this->templateTextEdit->clear();
 
     this->setClosedState();
 }
@@ -320,6 +325,9 @@ void MainApp::setClosedState()
     this->actionPaste_TB->setEnabled(false);
     this->actionInsertCol_TB->setEnabled(false);
     this->actionDeleteCol_TB->setEnabled(false);
+
+    this->tableWidget->setEnabled(false);
+    this->templateTextEdit->setEnabled(false);
 }
 
 void MainApp::buildTable(QString templ)
@@ -341,8 +349,7 @@ void MainApp::buildTable(QString templ)
             //Header
             QTableWidgetItem *row = new QTableWidgetItem();
 
-            QString param = pv[0];
-            row->setText(param);
+            row->setText(pv[0]);
 
             fieldsMap.insert(pv[0], rowc);
 
@@ -352,8 +359,14 @@ void MainApp::buildTable(QString templ)
             //Content
             QString preVal = "";
 
-            if(pv.size() > 0) {
-                preVal = pv[1];
+            if(pv.size() > 1) {
+                QStringList vh = pv[1].split("##");
+
+                preVal = vh[0];
+
+                if(vh.size() > 1) {
+                    row->setToolTip(vh[1]);
+                }
             }
 
             this->defaultsMap.insert(rowc, preVal);
@@ -421,7 +434,11 @@ void MainApp::deleteCol()
  */
 void MainApp::copyToClip()
 {
-    this->clipboard->setText(this->retrieveTable("\t"));
+    if(this->tabWidget->currentIndex() == 0) {
+        this->clipboard->setText(this->retrieveTable("\t"));
+    } else {
+        this->templateTextEdit->copy();
+    }
 }
 
 QString MainApp::retrieveTable(QString sep)
@@ -448,7 +465,11 @@ QString MainApp::retrieveTable(QString sep)
  */
 void MainApp::pasteFromClip()
 {
-    this->fillTable(this->clipboard->text(), "\t");
+    if(this->tabWidget->currentIndex() == 0) {
+        this->fillTable(this->clipboard->text(), "\t");
+    } else {
+        this->templateTextEdit->paste();
+    }
 }
 
 void MainApp::fillTable(QString text, QString colSep)

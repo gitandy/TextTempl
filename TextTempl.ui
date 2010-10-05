@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>350</height>
+    <width>600</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -24,25 +24,68 @@
    </property>
    <layout class="QVBoxLayout" >
     <item>
-     <widget class="QTableWidget" name="tableWidget" >
-      <property name="frameShape" >
-       <enum>QFrame::Panel</enum>
-      </property>
-      <property name="editTriggers" >
-       <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <property name="selectionMode" >
-       <enum>QAbstractItemView::SingleSelection</enum>
-      </property>
-      <property name="selectionBehavior" >
-       <enum>QAbstractItemView::SelectColumns</enum>
-      </property>
-      <property name="rowCount" >
+     <widget class="QTabWidget" name="tabWidget" >
+      <property name="currentIndex" >
        <number>0</number>
       </property>
-      <property name="columnCount" >
-       <number>0</number>
-      </property>
+      <widget class="QWidget" name="tab_form" >
+       <attribute name="title" >
+        <string>Form</string>
+       </attribute>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QTableWidget" name="tableWidget" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
+          <property name="frameShape" >
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="editTriggers" >
+           <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode" >
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior" >
+           <enum>QAbstractItemView::SelectColumns</enum>
+          </property>
+          <property name="rowCount" >
+           <number>0</number>
+          </property>
+          <property name="columnCount" >
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_template" >
+       <attribute name="title" >
+        <string>Template</string>
+       </attribute>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QTextEdit" name="templateTextEdit" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
+          <property name="font" >
+           <font>
+            <family>Courier</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="frameShape" >
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="lineWrapMode" >
+           <enum>QTextEdit::NoWrap</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -52,7 +95,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
+     <width>600</width>
      <height>19</height>
     </rect>
    </property>
@@ -174,6 +217,9 @@
    <property name="shortcut" >
     <string>Ctrl+C</string>
    </property>
+   <property name="shortcutContext" >
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionPaste" >
    <property name="enabled" >
@@ -187,6 +233,9 @@
    </property>
    <property name="shortcut" >
     <string>Ctrl+V</string>
+   </property>
+   <property name="shortcutContext" >
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionInsertCol" >
@@ -370,22 +419,6 @@
     <hint type="destinationlabel" >
      <x>215</x>
      <y>219</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tableWidget</sender>
-   <signal>cellChanged(int,int)</signal>
-   <receiver>tableWidget</receiver>
-   <slot>resizeColumnsToContents()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>140</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>140</x>
-     <y>174</y>
     </hint>
    </hints>
   </connection>

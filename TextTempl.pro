@@ -10,8 +10,10 @@ RESOURCES += TextTempl.qrc
 win32:RC_FILE = TextTempl.rc
 
 SOURCES += main.cpp \
-           MainApp.cpp \
+    MainApp.cpp \
+    Highlighter.cpp
 
-HEADERS += MainApp.h
+HEADERS += MainApp.h \
+    Highlighter.h
 
 TRANSLATIONS = TextTempl_de.ts

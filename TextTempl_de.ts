@@ -4,77 +4,104 @@
 <context>
     <name>MainApp</name>
     <message>
-        <location filename="MainApp.cpp" line="113"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="113"/>
         <location filename="MainApp.cpp" line="146"/>
         <location filename="MainApp.cpp" line="161"/>
         <location filename="MainApp.cpp" line="191"/>
         <location filename="MainApp.cpp" line="247"/>
-        <source>Error</source>
+=======        <location filename="MainApp.cpp" line="99"/>
+        <location filename="MainApp.cpp" line="139"/>
+        <location filename="MainApp.cpp" line="155"/>
+        <location filename="MainApp.cpp" line="185"/>
+        <location filename="MainApp.cpp" line="241"/>
+>>>>>>> .theirs        <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="98"/>
-        <source>Open template</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="98"/>
+=======        <location filename="MainApp.cpp" line="94"/>
+>>>>>>> .theirs        <source>Open template</source>
         <translation>Vorlage öffnen</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="98"/>
-        <source>Templates</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="98"/>
+=======        <location filename="MainApp.cpp" line="94"/>
+>>>>>>> .theirs        <source>Templates</source>
         <translation>Vorlagen</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="98"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="98"/>
         <location filename="MainApp.cpp" line="156"/>
         <location filename="MainApp.cpp" line="186"/>
         <location filename="MainApp.cpp" line="233"/>
-        <source>All Files</source>
+=======        <location filename="MainApp.cpp" line="94"/>
+        <location filename="MainApp.cpp" line="150"/>
+        <location filename="MainApp.cpp" line="180"/>
+        <location filename="MainApp.cpp" line="227"/>
+>>>>>>> .theirs        <source>All Files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="113"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="113"/>
         <location filename="MainApp.cpp" line="161"/>
-        <source>Couldn&apos;t open</source>
+=======        <location filename="MainApp.cpp" line="99"/>
+        <location filename="MainApp.cpp" line="155"/>
+>>>>>>> .theirs        <source>Couldn&apos;t open</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="146"/>
-        <source>The file contains no or bad template data</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="146"/>
+=======        <location filename="MainApp.cpp" line="139"/>
+>>>>>>> .theirs        <source>The file contains no or bad template data</source>
         <translation>Die Datei enthält keine oder nicht verwertbare Vorlagedaten</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="156"/>
-        <source>Load data file</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="156"/>
+=======        <location filename="MainApp.cpp" line="150"/>
+>>>>>>> .theirs        <source>Load data file</source>
         <translation>Datendatei laden</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="156"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="156"/>
         <location filename="MainApp.cpp" line="186"/>
-        <source>CSV-File</source>
+=======        <location filename="MainApp.cpp" line="150"/>
+        <location filename="MainApp.cpp" line="180"/>
+>>>>>>> .theirs        <source>CSV-File</source>
         <translation>CSV-Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="186"/>
-        <source>Save data file</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="186"/>
+=======        <location filename="MainApp.cpp" line="180"/>
+>>>>>>> .theirs        <source>Save data file</source>
         <translation>Daten speichern</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="225"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="225"/>
         <location filename="MainApp.cpp" line="226"/>
         <location filename="MainApp.cpp" line="251"/>
         <location filename="MainApp.cpp" line="279"/>
         <location filename="MainApp.cpp" line="280"/>
-        <source>Name</source>
+=======        <location filename="Highlighter.cpp" line="20"/>
+        <location filename="MainApp.cpp" line="219"/>
+        <location filename="MainApp.cpp" line="220"/>
+        <location filename="MainApp.cpp" line="245"/>
+        <location filename="MainApp.cpp" line="273"/>
+        <location filename="MainApp.cpp" line="274"/>
+>>>>>>> .theirs        <source>Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="233"/>
-        <source>Save file</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="233"/>
+=======        <location filename="MainApp.cpp" line="227"/>
+>>>>>>> .theirs        <source>Save file</source>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="191"/>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="191"/>
         <location filename="MainApp.cpp" line="247"/>
-        <source>Couldn&apos;t save to</source>
+=======        <location filename="MainApp.cpp" line="185"/>
+        <location filename="MainApp.cpp" line="241"/>
+>>>>>>> .theirs        <source>Couldn&apos;t save to</source>
         <translation>Datei</translation>
     </message>
     <message>
@@ -83,154 +110,186 @@
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="284"/>
-        <source>unnamed</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="284"/>
+=======        <location filename="MainApp.cpp" line="278"/>
+>>>>>>> .theirs        <source>unnamed</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="487"/>
-        <source>About</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="487"/>
+=======        <location filename="MainApp.cpp" line="498"/>
+>>>>>>> .theirs        <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="487"/>
-        <source>TextTempl</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="487"/>
+=======        <location filename="MainApp.cpp" line="498"/>
+>>>>>>> .theirs        <source>TextTempl</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="MainApp.cpp" line="391"/>
-        <source>Parameter</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="391"/>
+=======        <location filename="MainApp.cpp" line="394"/>
+>>>>>>> .theirs        <source>Parameter</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="396"/>
-        <source>Value</source>
+<<<<<<< .mine        <location filename="MainApp.cpp" line="396"/>
+=======        <location filename="MainApp.cpp" line="399"/>
+>>>>>>> .theirs        <source>Value</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="61"/>
-        <source>&amp;File</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="61"/>
+=======        <location filename="TextTempl.ui" line="104"/>
+>>>>>>> .theirs        <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="76"/>
-        <source>&amp;Help</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="76"/>
+=======        <location filename="TextTempl.ui" line="119"/>
+>>>>>>> .theirs        <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="97"/>
-        <source>toolBar</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="97"/>
+=======        <location filename="TextTempl.ui" line="140"/>
+>>>>>>> .theirs        <source>toolBar</source>
         <translation>Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="122"/>
-        <source>&amp;Open</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="122"/>
+=======        <location filename="TextTempl.ui" line="165"/>
+>>>>>>> .theirs        <source>&amp;Open</source>
         <translation>Ö&amp;ffnen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="125"/>
-        <source>Ctrl+O</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="125"/>
+=======        <location filename="TextTempl.ui" line="168"/>
+>>>>>>> .theirs        <source>Ctrl+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="136"/>
-        <source>&amp;Save</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="136"/>
+=======        <location filename="TextTempl.ui" line="179"/>
+>>>>>>> .theirs        <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="139"/>
-        <source>Ctrl+S</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="139"/>
+=======        <location filename="TextTempl.ui" line="182"/>
+>>>>>>> .theirs        <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="147"/>
-        <source>E&amp;xit</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="147"/>
+=======        <location filename="TextTempl.ui" line="190"/>
+>>>>>>> .theirs        <source>E&amp;xit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="158"/>
-        <source>&amp;About</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="158"/>
+=======        <location filename="TextTempl.ui" line="201"/>
+>>>>>>> .theirs        <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="161"/>
-        <source>Ctrl+A</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="161"/>
+=======        <location filename="TextTempl.ui" line="204"/>
+>>>>>>> .theirs        <source>Ctrl+A</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="200"/>
-        <source>&amp;Insert Column</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="200"/>
+=======        <location filename="TextTempl.ui" line="249"/>
+>>>>>>> .theirs        <source>&amp;Insert Column</source>
         <translation>Spalte h&amp;inzufügen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="203"/>
-        <source>Ctrl+I</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="203"/>
+=======        <location filename="TextTempl.ui" line="252"/>
+>>>>>>> .theirs        <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="214"/>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="214"/>
         <location filename="TextTempl.ui" line="352"/>
-        <source>Delete Column</source>
+=======        <location filename="TextTempl.ui" line="263"/>
+        <location filename="TextTempl.ui" line="401"/>
+>>>>>>> .theirs        <source>Delete Column</source>
         <translation>Spalte löschen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="217"/>
-        <source>Ctrl+-</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="217"/>
+=======        <location filename="TextTempl.ui" line="266"/>
+>>>>>>> .theirs        <source>Ctrl+-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="228"/>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="228"/>
         <location filename="TextTempl.ui" line="308"/>
-        <source>Load Data</source>
+=======        <location filename="TextTempl.ui" line="277"/>
+        <location filename="TextTempl.ui" line="357"/>
+>>>>>>> .theirs        <source>Load Data</source>
         <translation>Datendatei laden</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="231"/>
-        <source>&amp;Load Data</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="231"/>
+=======        <location filename="TextTempl.ui" line="280"/>
+>>>>>>> .theirs        <source>&amp;Load Data</source>
         <translation>Datendatei &amp;laden</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="234"/>
-        <source>Ctrl+L</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="234"/>
+=======        <location filename="TextTempl.ui" line="283"/>
+>>>>>>> .theirs        <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="245"/>
-        <source>Close</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="245"/>
+=======        <location filename="TextTempl.ui" line="294"/>
+>>>>>>> .theirs        <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="256"/>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="256"/>
         <location filename="TextTempl.ui" line="297"/>
-        <source>Save All</source>
+=======        <location filename="TextTempl.ui" line="305"/>
+        <location filename="TextTempl.ui" line="346"/>
+>>>>>>> .theirs        <source>Save All</source>
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="267"/>
-        <source>Save Data</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="267"/>
+=======        <location filename="TextTempl.ui" line="316"/>
+>>>>>>> .theirs        <source>Save Data</source>
         <translation>Daten speichern</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="275"/>
-        <source>Open</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="275"/>
+=======        <location filename="TextTempl.ui" line="324"/>
+>>>>>>> .theirs        <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="286"/>
-        <source>Save</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="286"/>
+=======        <location filename="TextTempl.ui" line="335"/>
+>>>>>>> .theirs        <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="341"/>
-        <source>Insert Column</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="341"/>
+=======        <location filename="TextTempl.ui" line="390"/>
+>>>>>>> .theirs        <source>Insert Column</source>
         <translation>Spalte einfügen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="150"/>
-        <source>Ctrl+Q</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="150"/>
+=======        <location filename="TextTempl.ui" line="193"/>
+>>>>>>> .theirs        <source>Ctrl+Q</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
@@ -239,30 +298,47 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="82"/>
-        <source>Edit</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="82"/>
+=======        <location filename="TextTempl.ui" line="33"/>
+        <source>Form</source>
+        <translation>Formular</translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="65"/>
+        <source>Template</source>
+        <translation>Vorlage</translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="125"/>
+>>>>>>> .theirs        <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="172"/>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="172"/>
         <location filename="TextTempl.ui" line="319"/>
-        <source>Copy</source>
+=======        <location filename="TextTempl.ui" line="215"/>
+        <location filename="TextTempl.ui" line="368"/>
+>>>>>>> .theirs        <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="175"/>
-        <source>Ctrl+C</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="175"/>
+=======        <location filename="TextTempl.ui" line="218"/>
+>>>>>>> .theirs        <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="186"/>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="186"/>
         <location filename="TextTempl.ui" line="330"/>
-        <source>Paste</source>
+=======        <location filename="TextTempl.ui" line="232"/>
+        <location filename="TextTempl.ui" line="379"/>
+>>>>>>> .theirs        <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="189"/>
-        <source>Ctrl+V</source>
+<<<<<<< .mine        <location filename="TextTempl.ui" line="189"/>
+=======        <location filename="TextTempl.ui" line="235"/>
+>>>>>>> .theirs        <source>Ctrl+V</source>
         <translation></translation>
     </message>
 </context>

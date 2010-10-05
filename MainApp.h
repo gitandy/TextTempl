@@ -5,7 +5,10 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QSettings>
+
 #include "ui_TextTempl.h"
+
+#include "Highlighter.h"
 
 #define CT_LINEEDIT 0
 #define CT_COMBOBOX 1
@@ -52,4 +55,6 @@ private:
     QClipboard *clipboard;
 
     QSettings *settings;
+
+    Highlighter *highlighter;
 };
