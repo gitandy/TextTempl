@@ -12,6 +12,8 @@
 #include <QLineEdit>
 #include <QComboBox>
 
+#include <QDebug>
+
 #include "MainApp.h"
 
 #include "version.h"
@@ -300,6 +302,10 @@ void MainApp::createFile()
 {
     int col = this->tableWidget->currentColumn();
 
+    if(col < 0) {
+        col = 0;
+    }
+
     QString fileDefault = "";
 
     if(fieldsMap.contains(tr("Name"))){
@@ -332,11 +338,12 @@ void MainApp::writeFile(QString fileName, int col)
 
         QMapIterator<QString, int> i(fieldsMap);
         while (i.hasNext()) {
-            QString repl = "\\$\\$" + i.next().key() + "@([a-zA-Z0-9_:+#!= ]*)\\$\\$";
+            QRegExp re("\\$\\$" + i.next().key() + "@.*\\$\\$");
+            re.setMinimal(true);
 
-            QString text = this->cellText(i.value(), col);
+            QString val = this->cellText(i.value(), col);
 
-            txt.replace(QRegExp(repl), text);
+            txt.replace(re, val);
         }
 
         *ts << txt;
