@@ -16,7 +16,7 @@ class MainApp
     Q_OBJECT
 
 public:
-    MainApp(QMainWindow *parent = 0);
+    MainApp(QString fileName, QMainWindow *parent = 0);
     virtual ~MainApp();
 
 private slots:
@@ -40,6 +40,7 @@ private:
     QString templ;
     void setClosedState();
 
+    void openFileString(QString fileName);
     void writeFile(QString fileName, int col);
     void buildTable(QString templ);
     void fillDefaults(int col);

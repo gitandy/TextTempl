@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
+#include <QDebug>
 #include "MainApp.h"
 
 int main(int argc, char* argv[])
@@ -11,7 +12,13 @@ int main(int argc, char* argv[])
     myappTranslator.load("TextTempl_" + QLocale::system().name());
     app.installTranslator(&myappTranslator);
 
-    QMainWindow *mw = new MainApp();
+    QString fileName = "";
+
+    if(app.arguments().count() > 1) {
+        fileName = app.arguments().at(1);
+    }
+
+    MainApp *mw = new MainApp(fileName);
 
     mw->show();
 

@@ -16,7 +16,7 @@
 
 #include "version.h"
 
-MainApp::MainApp(QMainWindow *parent)
+MainApp::MainApp(QString fileName, QMainWindow *parent)
     : QMainWindow(parent)
 {
     setupUi(this);
@@ -79,6 +79,10 @@ MainApp::MainApp(QMainWindow *parent)
     }
 
     this->settings->sync();
+
+    if(fileName != "") {
+        this->openFileString(fileName);
+    }
 }
 
 MainApp::~MainApp()
@@ -94,13 +98,20 @@ void MainApp::openFile()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->settings->value("openpath").toString(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
 
     if(fileName != "") {
-        QFile *templFile = new QFile(fileName);
-        if(!templFile->open(QIODevice::ReadOnly))
+        this->openFileString(fileName);
+
+        int posLastSep = fileName.lastIndexOf('/', -1);
+        this->settings->setValue("openpath", fileName.left(posLastSep));
+    }
+}
+
+void MainApp::openFileString(QString fileName)
+{
+    QFile *templFile = new QFile(fileName);
+
+    if(!templFile->open(QIODevice::ReadOnly))
             QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
         else {
-            int posLastSep = fileName.lastIndexOf('/', -1);
-            this->settings->setValue("openpath", fileName.left(posLastSep));
-
             QTextStream *ts = new QTextStream(templFile);
             templ = ts->readAll();
             templFile->close();
@@ -135,7 +146,6 @@ void MainApp::openFile()
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
         }
-    }
 }
 
 /*
