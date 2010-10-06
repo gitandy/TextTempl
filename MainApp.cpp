@@ -436,12 +436,18 @@ bool MainApp::buildTable(QString templ)
     this->defaultsMap.clear();
     this->typeMap.clear();
 
-    QStringList clst = templ.split("$$");
-
     int rowc = 0;
 
-    for (int i = 1; i < clst.size(); i += 2) {
-        QStringList pv = clst[i].split("@");
+    QRegExp re("\\$\\$[a-zA-Z0-9_\\-]+@.*\\$\\$");
+    re.setMinimal(true);
+
+    int index = templ.indexOf(re);
+    while (index >= 0) {
+        int length = re.matchedLength();
+
+        QStringList pv = templ.mid(index, length).remove("$$").split("@");
+
+        index = templ.indexOf(re , index + length);
 
         if(!fieldsMap.contains(pv[0])) {
             //Header

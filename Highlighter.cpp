@@ -9,7 +9,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
     textFormat.setFontItalic(true);
     textFormat.setForeground(Qt::blue);
-    rule.pattern = QRegExp("\\$\\$[a-zA-Z0-9_\\-]*@.*\\$\\$");
+    rule.pattern = QRegExp("\\$\\$[a-zA-Z0-9_\\-]+@.*\\$\\$");
     rule.pattern.setMinimal(true);
     rule.format = textFormat;
     highlightingRules.append(rule);
