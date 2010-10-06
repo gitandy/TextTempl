@@ -276,21 +276,23 @@ void MainApp::saveAll()
 {
     QString dirName = QFileDialog::getExistingDirectory(this, tr("Save all"), this->settings->value("savepath").toString(), QFileDialog::ShowDirsOnly);
 
-    this->settings->setValue("savepath", dirName);
+    if(dirName != "") {
+        this->settings->setValue("savepath", dirName);
 
-    for(int c = 0; c < this->tableWidget->columnCount(); c++) {
-        QString fileName = "";
-        if(fieldsMap.contains(tr("Name"))){
-            fileName = this->cellText(fieldsMap.value(tr("Name")), c);
+        for(int c = 0; c < this->tableWidget->columnCount(); c++) {
+            QString fileName = "";
+            if(fieldsMap.contains(tr("Name"))){
+                fileName = this->cellText(fieldsMap.value(tr("Name")), c);
+            }
+
+            if(fileName == "") {
+                fileName = tr("unnamed") + "_" + QString::number(c + 1);
+            }
+
+            fileName = dirName + "/" + fileName + ".txt";
+
+            this->writeFile(fileName, c);
         }
-
-        if(fileName == "") {
-            fileName = tr("unnamed") + "_" + QString::number(c + 1);
-        }
-
-        fileName = dirName + "/" + fileName + ".txt";
-
-        this->writeFile(fileName, c);
     }
 }
 
