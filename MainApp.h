@@ -23,9 +23,12 @@ public:
     virtual ~MainApp();
 
 private slots:
+    void newFile();
     void openFile();
     void saveFile();
-    void saveAll();
+    void saveFileAs();
+    void createFile();
+    void createAll();
     void openDataFile();
     void saveDataFile();
     void closeFile();

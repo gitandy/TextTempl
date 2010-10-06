@@ -24,9 +24,13 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     this->clipboard = QApplication::clipboard();
 
     //Menu
+    this->connect(this->actionNew,SIGNAL(triggered()),SLOT(newFile()));
     this->connect(this->actionOpen,SIGNAL(triggered()),SLOT(openFile()));
     this->connect(this->actionSave,SIGNAL(triggered()),SLOT(saveFile()));
-    this->connect(this->actionSaveAll,SIGNAL(triggered()),SLOT(saveAll()));
+    this->connect(this->actionSaveAs,SIGNAL(triggered()),SLOT(saveFileAs()));
+
+    this->connect(this->actionCreate,SIGNAL(triggered()),SLOT(createFile()));
+    this->connect(this->actionCreateAll,SIGNAL(triggered()),SLOT(createAll()));
 
     this->connect(this->actionLoadData,SIGNAL(triggered()),SLOT(openDataFile()));
     this->connect(this->actionSaveData,SIGNAL(triggered()),SLOT(saveDataFile()));
@@ -44,7 +48,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     //Toolbar
     this->connect(this->actionOpen_TB,SIGNAL(triggered()),SLOT(openFile()));
     this->connect(this->actionSave_TB,SIGNAL(triggered()),SLOT(saveFile()));
-    this->connect(this->actionSaveAll_TB,SIGNAL(triggered()),SLOT(saveAll()));
+    this->connect(this->actionCreate_TB,SIGNAL(triggered()),SLOT(createFile()));
+    this->connect(this->actionCreateAll_TB,SIGNAL(triggered()),SLOT(createAll()));
 
     this->connect(this->actionLoadData_TB,SIGNAL(triggered()),SLOT(openDataFile()));
 
@@ -93,6 +98,14 @@ MainApp::~MainApp()
 /*
  * private slot
  */
+void MainApp::newFile()
+{
+
+}
+
+/*
+ * private slot
+ */
 void MainApp::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open template"), this->settings->value("openpath").toString(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
@@ -124,7 +137,9 @@ void MainApp::openFileString(QString fileName)
             if(!this->fieldsMap.empty()) {
                 this->tableWidget->setEnabled(true);
                 this->actionSave->setEnabled(true);
-                this->actionSaveAll->setEnabled(true);
+                this->actionSaveAs->setEnabled(true);
+                this->actionCreate->setEnabled(true);
+                this->actionCreateAll->setEnabled(true);
                 this->actionLoadData->setEnabled(true);
                 this->actionSaveData->setEnabled(true);
                 this->actionClose->setEnabled(true);
@@ -134,7 +149,8 @@ void MainApp::openFileString(QString fileName)
                 this->actionDeleteCol->setEnabled(true);
 
                 this->actionSave_TB->setEnabled(true);
-                this->actionSaveAll_TB->setEnabled(true);
+                this->actionCreate_TB->setEnabled(true);
+                this->actionCreateAll_TB->setEnabled(true);
                 this->actionLoadData_TB->setEnabled(true);
                 this->actionCopy_TB->setEnabled(true);
                 this->actionPaste_TB->setEnabled(true);
@@ -150,6 +166,22 @@ void MainApp::openFileString(QString fileName)
                 QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
             }
         }
+}
+
+/*
+ * private slot
+ */
+void MainApp::saveFile()
+{
+
+}
+
+/*
+ * private slot
+ */
+void MainApp::saveFileAs()
+{
+
 }
 
 /*
@@ -220,7 +252,7 @@ void MainApp::saveDataFile()
 /*
  * private slot
  */
-void MainApp::saveFile()
+void MainApp::createFile()
 {
     int col = this->tableWidget->currentColumn();
 
@@ -272,7 +304,7 @@ void MainApp::writeFile(QString fileName, int col)
 /*
  * private slot
  */
-void MainApp::saveAll()
+void MainApp::createAll()
 {
     QString dirName = QFileDialog::getExistingDirectory(this, tr("Save all"), this->settings->value("savepath").toString(), QFileDialog::ShowDirsOnly);
 
@@ -311,7 +343,9 @@ void MainApp::setClosedState()
 {
     this->tableWidget->setEnabled(false);
     this->actionSave->setEnabled(false);
-    this->actionSaveAll->setEnabled(false);
+    this->actionSaveAs->setEnabled(false);
+    this->actionCreate->setEnabled(false);
+    this->actionCreateAll->setEnabled(false);
     this->actionLoadData->setEnabled(false);
     this->actionSaveData->setEnabled(false);
     this->actionClose->setEnabled(false);
@@ -321,7 +355,8 @@ void MainApp::setClosedState()
     this->actionDeleteCol->setEnabled(false);
 
     this->actionSave_TB->setEnabled(false);
-    this->actionSaveAll_TB->setEnabled(false);
+    this->actionCreate_TB->setEnabled(false);
+    this->actionCreateAll_TB->setEnabled(false);
     this->actionLoadData_TB->setEnabled(false);
     this->actionCopy_TB->setEnabled(false);
     this->actionPaste_TB->setEnabled(false);
