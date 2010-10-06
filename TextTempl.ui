@@ -417,6 +417,9 @@
    <property name="text" >
     <string>Create...</string>
    </property>
+   <property name="shortcut" >
+    <string>Ctrl+R</string>
+   </property>
   </action>
   <action name="actionSaveAs" >
    <property name="enabled" >
@@ -435,6 +438,9 @@
    </property>
    <property name="text" >
     <string>New</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionCreate_TB" >

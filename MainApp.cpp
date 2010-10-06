@@ -59,8 +59,6 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     this->connect(this->actionInsertCol_TB,SIGNAL(triggered()),SLOT(insertCol()));
     this->connect(this->actionDeleteCol_TB,SIGNAL(triggered()),SLOT(deleteCol()));
 
-    this->resetTable();
-
     this->tableWidget->resizeRowsToContents();
     this->tableWidget->resizeColumnsToContents();
 
@@ -85,6 +83,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 
     this->highlighter = new Highlighter(this->templateTextEdit->document());
 
+    this->closeFile();
+
     if(fileName != "") {
         this->openFileString(fileName);
     }
@@ -100,7 +100,11 @@ MainApp::~MainApp()
  */
 void MainApp::newFile()
 {
-
+    this->currentFile = "";
+    this->templ = "$$" + tr("Parameter") + "@" + tr("Value") + "$$";
+    this->buildTable(this->templ);
+    this->templateTextEdit->setPlainText(this->templ);
+    this->setOpenedState();
 }
 
 /*
@@ -123,49 +127,56 @@ void MainApp::openFileString(QString fileName)
     QFile *templFile = new QFile(fileName);
 
     if(!templFile->open(QIODevice::ReadOnly))
-            QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
-        else {
-            QTextStream *ts = new QTextStream(templFile);
-            templ = ts->readAll();
-            templFile->close();
+        QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
+    else {
+        this->currentFile = fileName;
 
-            this->buildTable(templ);
-            this->templateTextEdit->setPlainText(templ);
+        QTextStream *ts = new QTextStream(templFile);
+        templ = ts->readAll();
+        templFile->close();
 
-            tableWidget->resizeRowsToContents();
+        this->buildTable(templ);
+        this->templateTextEdit->setPlainText(templ);
 
-            if(!this->fieldsMap.empty()) {
-                this->tableWidget->setEnabled(true);
-                this->actionSave->setEnabled(true);
-                this->actionSaveAs->setEnabled(true);
-                this->actionCreate->setEnabled(true);
-                this->actionCreateAll->setEnabled(true);
-                this->actionLoadData->setEnabled(true);
-                this->actionSaveData->setEnabled(true);
-                this->actionClose->setEnabled(true);
-                this->actionCopy->setEnabled(true);
-                this->actionPaste->setEnabled(true);
-                this->actionInsertCol->setEnabled(true);
-                this->actionDeleteCol->setEnabled(true);
+        tableWidget->resizeRowsToContents();
 
-                this->actionSave_TB->setEnabled(true);
-                this->actionCreate_TB->setEnabled(true);
-                this->actionCreateAll_TB->setEnabled(true);
-                this->actionLoadData_TB->setEnabled(true);
-                this->actionCopy_TB->setEnabled(true);
-                this->actionPaste_TB->setEnabled(true);
-                this->actionInsertCol_TB->setEnabled(true);
-                this->actionDeleteCol_TB->setEnabled(true);
-
-                this->tableWidget->setEnabled(true);
-                this->templateTextEdit->setEnabled(true);
-            }
-            else {
-                this->setClosedState();
-
-                QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
-            }
+        if(!this->fieldsMap.empty()) {
+            this->setOpenedState();
         }
+        else {
+            this->setClosedState();
+
+            QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
+        }
+    }
+}
+
+void MainApp::setOpenedState()
+{
+    this->tableWidget->setEnabled(true);
+    this->actionSave->setEnabled(true);
+    this->actionSaveAs->setEnabled(true);
+    this->actionCreate->setEnabled(true);
+    this->actionCreateAll->setEnabled(true);
+    this->actionLoadData->setEnabled(true);
+    this->actionSaveData->setEnabled(true);
+    this->actionClose->setEnabled(true);
+    this->actionCopy->setEnabled(true);
+    this->actionPaste->setEnabled(true);
+    this->actionInsertCol->setEnabled(true);
+    this->actionDeleteCol->setEnabled(true);
+
+    this->actionSave_TB->setEnabled(true);
+    this->actionCreate_TB->setEnabled(true);
+    this->actionCreateAll_TB->setEnabled(true);
+    this->actionLoadData_TB->setEnabled(true);
+    this->actionCopy_TB->setEnabled(true);
+    this->actionPaste_TB->setEnabled(true);
+    this->actionInsertCol_TB->setEnabled(true);
+    this->actionDeleteCol_TB->setEnabled(true);
+
+    this->tableWidget->setEnabled(true);
+    this->templateTextEdit->setEnabled(true);
 }
 
 /*
@@ -173,7 +184,11 @@ void MainApp::openFileString(QString fileName)
  */
 void MainApp::saveFile()
 {
-
+    if(this->currentFile != "") {
+        this->writeTemplFile(this->currentFile);
+    } else {
+        this->saveFileAs();
+    }
 }
 
 /*
@@ -181,7 +196,29 @@ void MainApp::saveFile()
  */
 void MainApp::saveFileAs()
 {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save template file"), this->settings->value("openpath").toString(), tr("Templates") + " (*.templ);;" + tr("All Files") + " (*.*)");
 
+    if(fileName != "") {
+        this->writeTemplFile(fileName);
+    }
+}
+
+void MainApp::writeTemplFile(QString fileName)
+{
+    QFile *file = new QFile(fileName);
+    if(!file->open(QIODevice::WriteOnly))
+        QMessageBox::critical(this, tr("Error"), tr("Couldn't save to") + " " + fileName + "\n" + file->errorString());
+    else {
+        int posLastSep = fileName.lastIndexOf('/', -1);
+        this->settings->setValue("openpath", fileName.left(posLastSep));
+
+        QTextStream *ts = new QTextStream(file);
+
+        *ts << this->templateTextEdit->toPlainText();
+
+        ts->flush();
+        file->close();
+    }
 }
 
 /*
@@ -333,14 +370,17 @@ void MainApp::createAll()
  */
 void MainApp::closeFile()
 {
-    this->resetTable();
-    this->templateTextEdit->clear();
+    this->newFile();
 
     this->setClosedState();
 }
 
 void MainApp::setClosedState()
 {
+    this->templateTextEdit->clear();
+
+    this->currentFile = "";
+
     this->tableWidget->setEnabled(false);
     this->actionSave->setEnabled(false);
     this->actionSaveAs->setEnabled(false);
@@ -369,7 +409,10 @@ void MainApp::setClosedState()
 
 void MainApp::buildTable(QString templ)
 {
-    this->resetTable();
+    tableWidget->clear();
+
+    tableWidget->setRowCount(0);
+    tableWidget->setColumnCount(1);
 
     this->fieldsMap.clear();
     this->defaultsMap.clear();
@@ -425,26 +468,6 @@ void MainApp::fillDefaults(int col)
     for(int row = 0; row < this->tableWidget->rowCount(); row++) {
         this->setCell(row, col, this->defaultsMap.value(row));
     }
-}
-
-/*
- * private slot
- */
-void MainApp::resetTable() 
-{
-    tableWidget->clear();
-
-    tableWidget->setRowCount(1);
-    tableWidget->setColumnCount(1);
-
-    QTableWidgetItem *__rowItem = new QTableWidgetItem();
-    __rowItem->setText(QApplication::translate("MainWindow", "Parameter", 0, QApplication::UnicodeUTF8));
-    tableWidget->setVerticalHeaderItem(0, __rowItem);
-
-    QLineEdit *__item = new QLineEdit();
-    __item->setFrame(false);
-    __item->setText(QApplication::translate("MainWindow", "Value", 0, QApplication::UnicodeUTF8));
-    tableWidget->setCellWidget(0, 0, __item);
 }
 
 /*

@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="de">
+<!DOCTYPE TS><TS version="1.1" language="de">
+<defaultcodec></defaultcodec>
 <context>
     <name>MainApp</name>
     <message>
-        <location filename="MainApp.cpp" line="126"/>
-        <location filename="MainApp.cpp" line="166"/>
-        <location filename="MainApp.cpp" line="197"/>
-        <location filename="MainApp.cpp" line="227"/>
-        <location filename="MainApp.cpp" line="283"/>
+        <location filename="MainApp.cpp" line="320"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="111"/>
+        <location filename="MainApp.cpp" line="115"/>
         <source>Open template</source>
         <translation>Vorlage öffnen</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="111"/>
+        <location filename="MainApp.cpp" line="104"/>
+        <source>Parameter</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="MainApp.cpp" line="104"/>
+        <source>Value</source>
+        <translation>Wert</translation>
+    </message>
+    <message>
+        <location filename="MainApp.cpp" line="199"/>
         <source>Templates</source>
         <translation>Vorlagen</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="111"/>
-        <location filename="MainApp.cpp" line="192"/>
-        <location filename="MainApp.cpp" line="222"/>
-        <location filename="MainApp.cpp" line="269"/>
+        <location filename="MainApp.cpp" line="306"/>
         <source>All Files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="126"/>
-        <location filename="MainApp.cpp" line="197"/>
+        <location filename="MainApp.cpp" line="234"/>
         <source>Couldn&apos;t open</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="166"/>
+        <location filename="MainApp.cpp" line="149"/>
         <source>The file contains no or bad template data</source>
         <translation>Die Datei enthält keine oder nicht verwertbare Vorlagedaten</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="192"/>
+        <location filename="MainApp.cpp" line="199"/>
+        <source>Save template file</source>
+        <translation>Vorlage speichern</translation>
+    </message>
+    <message>
+        <location filename="MainApp.cpp" line="229"/>
         <source>Load data file</source>
         <translation>Datendatei laden</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="192"/>
-        <location filename="MainApp.cpp" line="222"/>
+        <location filename="MainApp.cpp" line="259"/>
         <source>CSV-File</source>
         <translation>CSV-Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="222"/>
+        <location filename="MainApp.cpp" line="259"/>
         <source>Save data file</source>
         <translation>Daten speichern</translation>
     </message>
     <message>
-        <location filename="Highlighter.cpp" line="20"/>
-        <location filename="MainApp.cpp" line="261"/>
-        <location filename="MainApp.cpp" line="262"/>
-        <location filename="MainApp.cpp" line="287"/>
-        <location filename="MainApp.cpp" line="315"/>
-        <location filename="MainApp.cpp" line="316"/>
+        <location filename="MainApp.cpp" line="354"/>
         <source>Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="269"/>
+        <location filename="MainApp.cpp" line="306"/>
         <source>Save file</source>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="227"/>
-        <location filename="MainApp.cpp" line="283"/>
+        <location filename="MainApp.cpp" line="320"/>
         <source>Couldn&apos;t save to</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="309"/>
+        <location filename="MainApp.cpp" line="346"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="320"/>
+        <location filename="MainApp.cpp" line="358"/>
         <source>unnamed</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="543"/>
+        <location filename="MainApp.cpp" line="568"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="543"/>
+        <location filename="MainApp.cpp" line="568"/>
         <source>TextTempl</source>
         <translation></translation>
     </message>
@@ -102,14 +102,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="MainApp.cpp" line="439"/>
-        <source>Parameter</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="MainApp.cpp" line="444"/>
+        <location filename="MainApp.cpp" line="568"/>
         <source>Value</source>
-        <translation>Wert</translation>
+        <translation type="obsolete">Wert</translation>
     </message>
     <message>
         <location filename="TextTempl.ui" line="104"/>
@@ -127,6 +122,7 @@
         <translation>Werkzeugleiste</translation>
     </message>
     <message>
+        <location filename="TextTempl.ui" line="144"/>
         <source>&amp;Open</source>
         <translation type="obsolete">Ö&amp;ffnen</translation>
     </message>
@@ -171,7 +167,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="269"/>
         <location filename="TextTempl.ui" line="407"/>
         <source>Delete Column</source>
         <translation>Spalte löschen</translation>
@@ -207,17 +202,27 @@
         <translation>Erstellen...</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="429"/>
+        <location filename="TextTempl.ui" line="421"/>
+        <source>Ctrl+R</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="432"/>
         <source>Save As...</source>
         <translation>Speichern unter...</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="437"/>
+        <location filename="TextTempl.ui" line="440"/>
         <source>New</source>
         <translation>Neu</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="448"/>
+        <location filename="TextTempl.ui" line="443"/>
+        <source>Ctrl+N</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="TextTempl.ui" line="454"/>
         <source>Create</source>
         <translation>Erstellen</translation>
     </message>
@@ -287,7 +292,6 @@
         <translation>Ö&amp;ffnen</translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="221"/>
         <location filename="TextTempl.ui" line="374"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
@@ -298,7 +302,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="TextTempl.ui" line="238"/>
         <location filename="TextTempl.ui" line="385"/>
         <source>Paste</source>
         <translation>Einfügen</translation>

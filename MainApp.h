@@ -43,14 +43,16 @@ private:
     QMap<int, QString> defaultsMap;
     QMap<int, int> typeMap;
 
+    QString currentFile;
+
     QString templ;
     void setClosedState();
-
+    void setOpenedState();
     void openFileString(QString fileName);
+    void writeTemplFile(QString fileName);
     void writeFile(QString fileName, int col);
     void buildTable(QString templ);
     void fillDefaults(int col);
-    void resetTable();
     void fillTable(QString text, QString colSep);
     QString retrieveTable(QString sep);
     void setCell(int row, int col, QString text);
