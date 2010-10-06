@@ -33,6 +33,7 @@ private slots:
     void saveDataFile();
     void closeFile();
     void showAbout();
+    void reloadTempl();
     void copyToClip();
     void pasteFromClip();
     void insertCol();

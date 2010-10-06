@@ -41,6 +41,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 
     this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
+    this->connect(this->actionReload,SIGNAL(triggered()),SLOT(reloadTempl()));
+
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
     this->connect(this->actionPaste,SIGNAL(triggered()),SLOT(pasteFromClip()));
 
@@ -54,6 +56,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
     this->connect(this->actionCreateAll_TB,SIGNAL(triggered()),SLOT(createAll()));
 
     this->connect(this->actionLoadData_TB,SIGNAL(triggered()),SLOT(openDataFile()));
+
+    this->connect(this->actionReload_TB,SIGNAL(triggered()),SLOT(reloadTempl()));
 
     this->connect(this->actionCopy_TB,SIGNAL(triggered()),SLOT(copyToClip()));
     this->connect(this->actionPaste_TB,SIGNAL(triggered()),SLOT(pasteFromClip()));
@@ -160,6 +164,7 @@ void MainApp::setOpenedState()
     this->actionLoadData->setEnabled(true);
     this->actionSaveData->setEnabled(true);
     this->actionClose->setEnabled(true);
+    this->actionReload->setEnabled(true);
     this->actionCopy->setEnabled(true);
     this->actionPaste->setEnabled(true);
     this->actionInsertCol->setEnabled(true);
@@ -169,6 +174,7 @@ void MainApp::setOpenedState()
     this->actionCreate_TB->setEnabled(true);
     this->actionCreateAll_TB->setEnabled(true);
     this->actionLoadData_TB->setEnabled(true);
+    this->actionReload_TB->setEnabled(true);
     this->actionCopy_TB->setEnabled(true);
     this->actionPaste_TB->setEnabled(true);
     this->actionInsertCol_TB->setEnabled(true);
@@ -392,6 +398,7 @@ void MainApp::setClosedState()
     this->actionLoadData->setEnabled(false);
     this->actionSaveData->setEnabled(false);
     this->actionClose->setEnabled(false);
+    this->actionReload->setEnabled(false);
     this->actionCopy->setEnabled(false);
     this->actionPaste->setEnabled(false);
     this->actionInsertCol->setEnabled(false);
@@ -401,6 +408,7 @@ void MainApp::setClosedState()
     this->actionCreate_TB->setEnabled(false);
     this->actionCreateAll_TB->setEnabled(false);
     this->actionLoadData_TB->setEnabled(false);
+    this->actionReload_TB->setEnabled(false);
     this->actionCopy_TB->setEnabled(false);
     this->actionPaste_TB->setEnabled(false);
     this->actionInsertCol_TB->setEnabled(false);
@@ -500,6 +508,16 @@ void MainApp::deleteCol()
 {
     if(this->tableWidget->columnCount() > 1) {
         this->tableWidget->setColumnCount(this->tableWidget->columnCount() - 1);
+    }
+}
+
+/*
+ * private slot
+ */
+void MainApp::reloadTempl()
+{
+    if(QMessageBox::warning(this, tr("Reload Template?"), tr("When reloading the template\nall form data will be lost"), QMessageBox::Ok|QMessageBox::Cancel) == QMessageBox::Ok) {
+        this->buildTable(this->templateTextEdit->toPlainText());
     }
 }
 

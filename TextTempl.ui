@@ -128,6 +128,8 @@
     <property name="title" >
      <string>Edit</string>
     </property>
+    <addaction name="actionReload" />
+    <addaction name="separator" />
     <addaction name="actionCopy" />
     <addaction name="actionPaste" />
     <addaction name="separator" />
@@ -157,6 +159,7 @@
    <addaction name="separator" />
    <addaction name="actionLoadData_TB" />
    <addaction name="separator" />
+   <addaction name="actionReload_TB" />
    <addaction name="actionCopy_TB" />
    <addaction name="actionPaste_TB" />
    <addaction name="separator" />
@@ -452,6 +455,25 @@
    </property>
    <property name="text" >
     <string>Create</string>
+   </property>
+  </action>
+  <action name="actionReload" >
+   <property name="icon" >
+    <iconset resource="TextTempl.qrc" >:/images/reload.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Reload Template</string>
+   </property>
+  </action>
+  <action name="actionReload_TB" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="TextTempl.qrc" >:/images/reload.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Reload Template</string>
    </property>
   </action>
  </widget>
