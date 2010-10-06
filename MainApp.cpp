@@ -524,7 +524,8 @@ void MainApp::deleteCol()
 void MainApp::reloadTempl()
 {
     if(QMessageBox::warning(this, tr("Reload Template?"), tr("When reloading the template\nall form data will be lost"), QMessageBox::Ok|QMessageBox::Cancel) == QMessageBox::Ok) {
-        this->buildTable(this->templateTextEdit->toPlainText());
+        this->templ = this->templateTextEdit->toPlainText();
+        this->buildTable(this->templ);
     }
 }
 
