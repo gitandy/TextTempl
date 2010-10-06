@@ -85,7 +85,7 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 
     if(!this->settings->contains("savepath")) {
         this->settings->setValue("savepath", QDir::homePath());
-    }
+    }  
 
     this->settings->sync();
 
@@ -110,7 +110,7 @@ void MainApp::newFile()
 {
     this->currentFile = "";
     this->setWindowTitle(this->wTitle + " - " + tr("unnamed"));
-    this->templ = "$$" + tr("Parameter") + "@" + tr("Value") + "$$";
+    this->templ = "[[" + tr("Parameter") + "@" + tr("Value") + "]]";
     this->buildTable(this->templ);
     this->templateTextEdit->setPlainText(this->templ);
     this->setOpenedState();
@@ -334,11 +334,11 @@ void MainApp::writeFile(QString fileName, int col)
     else {
         QTextStream *ts = new QTextStream(file);
 
-        QString txt = templ.remove("$$" + tr("Name") + "@***$$").trimmed();
+        QString txt = templ.remove("[[" + tr("Name") + "@***]]").trimmed();
 
         QMapIterator<QString, int> i(fieldsMap);
         while (i.hasNext()) {
-            QRegExp re("\\$\\$" + i.next().key() + "@.*\\$\\$");
+            QRegExp re("\\[\\[" + i.next().key() + "@.*\\]\\]");
             re.setMinimal(true);
 
             QString val = this->cellText(i.value(), col);
@@ -438,14 +438,14 @@ bool MainApp::buildTable(QString templ)
 
     int rowc = 0;
 
-    QRegExp re("\\$\\$[a-zA-Z0-9_\\-]+@.*\\$\\$");
+    QRegExp re("\\[\\[[a-zA-Z0-9_\\-]+@.*\\]\\]");
     re.setMinimal(true);
 
     int index = templ.indexOf(re);
     while (index >= 0) {
         int length = re.matchedLength();
 
-        QStringList pv = templ.mid(index, length).remove("$$").split("@");
+        QStringList pv = templ.mid(index, length).remove("[[").remove("]]").split("@");
 
         index = templ.indexOf(re , index + length);
 
