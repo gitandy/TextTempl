@@ -45,13 +45,15 @@ private:
 
     QString currentFile;
 
+    QString wTitle;
+
     QString templ;
     void setClosedState();
     void setOpenedState();
     void openFileString(QString fileName);
     void writeTemplFile(QString fileName);
     void writeFile(QString fileName, int col);
-    void buildTable(QString templ);
+    bool buildTable(QString templ);
     void fillDefaults(int col);
     void fillTable(QString text, QString colSep);
     QString retrieveTable(QString sep);

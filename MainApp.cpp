@@ -21,6 +21,8 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 {
     setupUi(this);
 
+    this->wTitle = this->windowTitle();
+
     this->clipboard = QApplication::clipboard();
 
     //Menu
@@ -101,6 +103,7 @@ MainApp::~MainApp()
 void MainApp::newFile()
 {
     this->currentFile = "";
+    this->setWindowTitle(this->wTitle + " - " + tr("unnamed"));
     this->templ = "$$" + tr("Parameter") + "@" + tr("Value") + "$$";
     this->buildTable(this->templ);
     this->templateTextEdit->setPlainText(this->templ);
@@ -129,25 +132,21 @@ void MainApp::openFileString(QString fileName)
     if(!templFile->open(QIODevice::ReadOnly))
         QMessageBox::critical(this, tr("Error"), tr("Couldn't open") + " " + fileName + "\n" + templFile->errorString());
     else {
-        this->currentFile = fileName;
-
         QTextStream *ts = new QTextStream(templFile);
-        templ = ts->readAll();
+        QString ntempl = ts->readAll();
         templFile->close();
 
-        this->buildTable(templ);
-        this->templateTextEdit->setPlainText(templ);
-
-        tableWidget->resizeRowsToContents();
-
-        if(!this->fieldsMap.empty()) {
+        if(this->buildTable(ntempl)) {
+            this->templ = ntempl;
             this->setOpenedState();
         }
         else {
-            this->setClosedState();
-
-            QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
+            this->newFile();
         }
+
+        this->currentFile = fileName;
+        this->setWindowTitle(this->wTitle + " - " + fileName);
+        this->templateTextEdit->setPlainText(ntempl);
     }
 }
 
@@ -200,6 +199,8 @@ void MainApp::saveFileAs()
 
     if(fileName != "") {
         this->writeTemplFile(fileName);
+        this->currentFile = fileName;
+        this->setWindowTitle(this->wTitle + " - " + fileName);
     }
 }
 
@@ -381,6 +382,8 @@ void MainApp::setClosedState()
 
     this->currentFile = "";
 
+    this->setWindowTitle(this->wTitle);
+
     this->tableWidget->setEnabled(false);
     this->actionSave->setEnabled(false);
     this->actionSaveAs->setEnabled(false);
@@ -407,7 +410,7 @@ void MainApp::setClosedState()
     this->templateTextEdit->setEnabled(false);
 }
 
-void MainApp::buildTable(QString templ)
+bool MainApp::buildTable(QString templ)
 {
     tableWidget->clear();
 
@@ -461,6 +464,17 @@ void MainApp::buildTable(QString templ)
     }
 
     this->fillDefaults(0);
+
+    if(!this->fieldsMap.empty()) {
+        tableWidget->resizeRowsToContents();
+
+        return true;
+    }
+    else {
+        QMessageBox::warning(this, tr("Error"), tr("The file contains no or bad template data"));
+
+        return false;
+    }
 }
 
 void MainApp::fillDefaults(int col)
