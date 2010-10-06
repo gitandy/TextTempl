@@ -351,7 +351,7 @@ void MainApp::createAll()
         for(int c = 0; c < this->tableWidget->columnCount(); c++) {
             QString fileName = "";
             if(fieldsMap.contains(tr("Name"))){
-                fileName = this->cellText(fieldsMap.value(tr("Name")), c);
+                fileName = this->cellText(fieldsMap.value(tr("Name")), c).trimmed();
             }
 
             if(fileName == "") {
