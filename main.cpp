@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     QApplication app(argc, argv);
 
     QTranslator myappTranslator;
-    myappTranslator.load("TextTempl_" + QLocale::system().name());
+    myappTranslator.load("TextTempl_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&myappTranslator);
 
     QString fileName = "";
@@ -19,6 +19,8 @@ int main(int argc, char* argv[])
     }
 
     MainApp *mw = new MainApp(fileName);
+
+    mw->appPath = app.applicationDirPath();
 
     mw->show();
 

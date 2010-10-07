@@ -22,6 +22,8 @@ public:
     MainApp(QString fileName, QMainWindow *parent = 0);
     virtual ~MainApp();
 
+    QString appPath;
+
 private slots:
     void newFile();
     void openFile();
