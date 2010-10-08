@@ -34,8 +34,21 @@ ifeq ($(OS),Windows_NT)
 	7z a -tzip ../dist/TextTempl-$(VERSION).zip assistant.exe
 endif
 
-.PHONY: help
+.PHONY: help version.iss
+version.iss:
+	echo "#define MyAppVersion \"$(VERSION)\"" > $@
+
+installer: i18n version.iss
+ifeq ($(OS),Windows_NT)
+	iscc /Q /Odist installer.iss
+else
+	@echo "Target installer is only available for windows"
+endif
 
 clean:
 	rm -Rf dist
 	rm -f TextTempl_*.qm
+
+ifeq ($(OS),Windows_NT)
+	rm -f version.iss
+endif
