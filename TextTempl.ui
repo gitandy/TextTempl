@@ -122,6 +122,8 @@
     <property name="title" >
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionHelp" />
+    <addaction name="separator" />
     <addaction name="actionAbout" />
    </widget>
    <widget class="QMenu" name="menuEdit" >
@@ -474,6 +476,17 @@
    </property>
    <property name="text" >
     <string>Reload Template</string>
+   </property>
+  </action>
+  <action name="actionHelp" >
+   <property name="icon" >
+    <iconset resource="TextTempl.qrc" >:/images/help.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Help</string>
+   </property>
+   <property name="shortcut" >
+    <string>F1</string>
    </property>
   </action>
  </widget>

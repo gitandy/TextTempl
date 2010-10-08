@@ -1,0 +1,2 @@
+TextTempl stellt Formularfelder aus einer Vorlagen-Datei dar
+und ersetzt beim Speichern die Felder durch die eingegebenen Daten.

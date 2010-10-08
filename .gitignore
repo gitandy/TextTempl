@@ -4,6 +4,8 @@ ui_*.h
 version.*
 *.o
 *.qm
+*.qhc
+*.qch
 moc
 obj
 qrc_*.cpp

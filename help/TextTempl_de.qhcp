@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QHelpCollectionProject version="1.0">
+    <assistant>
+        <title>TextTempl</title>
+        <applicationIcon>de/images/handbook.png</applicationIcon>
+        <startPage>qthelp://schawo.de/TextTempl/de/index.html</startPage>
+        <aboutMenuText>
+            <text>Über TextTempl</text>
+        </aboutMenuText>
+        <aboutDialog>
+            <file>de/about.txt</file>
+        </aboutDialog>
+        <cacheDirectory>.TextTempl_de</cacheDirectory>
+    </assistant>
+    <docFiles>
+        <generate>
+            <file>
+                <input>TextTempl_de.qhp</input>
+                <output>TextTempl_de.qch</output>
+            </file>
+        </generate>
+        <register>
+            <file>TextTempl_de.qch</file>
+        </register>
+    </docFiles>
+</QHelpCollectionProject>

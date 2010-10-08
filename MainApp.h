@@ -34,12 +34,13 @@ private slots:
     void openDataFile();
     void saveDataFile();
     void closeFile();
-    void showAbout();
     void reloadTempl();
     void copyToClip();
     void pasteFromClip();
     void insertCol();
     void deleteCol();
+    void showHelp();
+    void showAbout();
 
 private:
     QMap<QString, int> fieldsMap;

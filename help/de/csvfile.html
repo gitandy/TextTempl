@@ -1,0 +1,40 @@
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Handbuch</title>
+    </head>
+    <body style="font-size:12pt;font-family:helvetica">
+
+	<p><center><h2>CSV-Datei</h2></center></p>
+
+	<h3>Daten laden</h3>
+	Über den Menüpunkt Datei > Daten laden... kann eine Datei mit Daten 
+	für die Formularfelder ausgewählt werden. Das Format der Datei eine 
+	Semikolon-Getrennte-Liste. Die einzelnen Felder können mit 
+	Anführungszeichen ("") eingefasst werden.
+
+	<p>
+	  Wird ein anderer Feldtrenner als ; benötigt muss der
+	  Registrierungsschlüssel <pre>HKEY_CURRENT_USER/Software/schawo.de/TextTempl/csv_sep</pre>
+	  Type SZ auf z.B.: , gesetzt werden. Diese Einstellung gilt auch für 
+	  das Speichern der Daten.
+
+	<p>
+	  Je Spalte wird ein Datensatz in die Formularspalte eingetragen.
+
+	<h3>Daten speichern</h3>
+	Über den Menüpunkt Datei > Daten speichern... werden die aktuellen 
+	Formulardaten in ein Semikolon-Getrennte-Liste gespeichert.
+
+	<p>
+	  Wird ein andere Feldtrenner als ; benötigt s. Bemerkung zum Regestriuerungsschlüssel unter "Daten laden".
+
+	<p>
+	  Wird eine Einfassung der Daten in Anführungszeichen gewünscht muss der
+	  Registrierungsschlüssel <pre>HKEY_CURRENT_USER/Software/schawo.de/TextTempl/csv_quote</pre>
+	  Type DWORD auf 1 gesetzt werden.
+    </body>
+</html>
+
+
+

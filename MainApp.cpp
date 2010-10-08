@@ -11,8 +11,7 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QComboBox>
-
-#include <QDebug>
+#include <QProcess>
 
 #include "MainApp.h"
 
@@ -41,8 +40,6 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 
     this->connect(this->actionClose,SIGNAL(triggered()),SLOT(closeFile()));
 
-    this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
-
     this->connect(this->actionReload,SIGNAL(triggered()),SLOT(reloadTempl()));
 
     this->connect(this->actionCopy,SIGNAL(triggered()),SLOT(copyToClip()));
@@ -66,6 +63,9 @@ MainApp::MainApp(QString fileName, QMainWindow *parent)
 
     this->connect(this->actionInsertCol_TB,SIGNAL(triggered()),SLOT(insertCol()));
     this->connect(this->actionDeleteCol_TB,SIGNAL(triggered()),SLOT(deleteCol()));
+
+    this->connect(this->actionHelp,SIGNAL(triggered()),SLOT(showHelp()));
+    this->connect(this->actionAbout,SIGNAL(triggered()),SLOT(showAbout()));
 
     this->tableWidget->resizeRowsToContents();
     this->tableWidget->resizeColumnsToContents();
@@ -592,6 +592,23 @@ void MainApp::fillTable(QString text, QString colSep)
             this->setCell(r, c, colList[c].trimmed());
         }
     }
+}
+
+/*
+ * private slot
+ */
+void MainApp::showHelp()
+{
+    QProcess *process = new QProcess;
+
+    QStringList args;
+    args << QLatin1String("-collectionFile")
+         << QLatin1String((this->appPath + QDir::separator() + "TextTempl_de.qhc").toLatin1());
+
+    process->start(QLatin1String("assistant"), args);
+
+    if(!process->waitForStarted())
+        return;
 }
 
 /*

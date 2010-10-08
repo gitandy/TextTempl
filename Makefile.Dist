@@ -2,11 +2,14 @@ VERSION = $(shell git describe)
 
 all: package
 
+help:
+	qcollectiongenerator help/TextTempl_de.qhcp
+
 i18n:
 	lupdate -silent TextTempl.pro
 	lrelease TextTempl.pro
 
-package: i18n 
+package: help i18n 
 	rm -f dist/TextTempl-*.zip
 
 ifeq ($(OS),Windows_NT)
@@ -18,11 +21,20 @@ else
 endif
 
 	7z a -tzip dist/TextTempl-$(VERSION).zip TextTempl_*.qm
+
+	cd help; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip TextTempl_*.qhc; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip TextTempl_*.qch
 	
 ifeq ($(OS),Windows_NT)
 	cd lib; \
 	7z a -tzip ../dist/TextTempl-$(VERSION).zip *.dll
+
+	cd help; \
+	7z a -tzip ../dist/TextTempl-$(VERSION).zip assistant.exe
 endif
+
+.PHONY: help
 
 clean:
 	rm -Rf dist

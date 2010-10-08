@@ -1,0 +1,68 @@
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Handbuch</title>
+    </head>
+    <body style="font-size:12pt;font-family:helvetica">
+
+	<p><center><h2>Felddefinition</h2></center></p>
+
+	Ein Feld besteht mindestens aus dem Starttag "[[",<br />
+	einem Feldnamen, dem Trennzeichen "@" und dem Endetag "]]":
+	<pre>[[Feldname@]]</pre>
+
+	Ein Feld kann mehrfach in der Vorlage vorkommen.<br />
+	Es erscheint nur einmal im Formular.
+
+	<p>
+	  Zusätzlich kann nach dem "@" eine Vorbelegung angegeben werden.<br />
+	  Die vorbelegung muss, bei Feldern mit gleichem Namen, nur<br />
+	  im ersten Feld angegeben werden.
+	  <pre>[[Feldname@Standardwert]]</pre>
+
+	  Die Vorbelegung kann als Optionsliste aufgeführt werden. Hierzu
+	  werden die einzelnen Optionen mit "::" getrennt.
+	  <pre>[[Feldname@Ja::Nein]]</pre>
+
+	  Endet die Optionsliste mit "::" so wird das Formularfeld editierbar.
+	  <pre>[[Feldname@Wert1::Wert2::]]</pre>
+
+	<p>
+	  Nach der Vorbelegung ist ein Kommentar möglich der<br />
+	  durch "##" abgetrennt wird und im Formular als Tooltip erscheint.
+	  <pre>[[Feldname@Wert1::Wert2::##Anlagentyp]]</pre>
+
+	<p>
+	  Existiert ein Feld mit dem Namen "Name" so wird dies als Dateiname 
+	  verwendet.<br />
+	  
+	  Soll kein "Name" Feld imn der Vorlage vorkommen, der Dateiname aber 
+	  vorgegeben werden, so kann hierfür ein Dummyfeld in die erste Zeile 
+	  der Datei eingefügt werden.
+	  <pre>[[Name@***]]</pre>
+	  Diese Feld erscheint dann im Formular, wird aber nicht in das 
+	  Resultat mit übernommen. 
+
+	<h3>Beispiel</h3>
+	<pre>
+[User]
+Name = [[Name@susanne##User Login Name]]
+Type = [[Typ@user::admin##Benutzertyp]]
+eMail = [[Name@]]@test.de
+	</pre>
+	<img src="images/example_templ.png" />
+
+	<p>
+	  Das Resultat der Vorlage mit den Standardwerten wäre:
+	  <pre>
+[User]
+Name = susanne
+Type = user
+eMail = susanne@test.de
+	  </pre>
+	<img src="images/example_result.png" />
+    </body>
+</html>
+
+
+

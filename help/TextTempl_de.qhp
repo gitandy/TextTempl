@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>schawo.de</namespace>
+    <virtualFolder>TextTempl</virtualFolder>
+    <filterSection>
+        <toc>
+            <section title="TextTempl" ref="de/index.html">
+                <section title="Felddefinition" ref="de/template.html"/>
+                <section title="CSV-Datei" ref="de/csvfile.html"/>
+	    </section>
+        </toc>
+        <keywords>
+            <keyword name="CSV-Datei" ref="de/csvfile.html" id="CSV-Datei"/>
+            <keyword name="Feld" ref="de/template.html" id="Feld"/>
+            <keyword name="Vorlage" ref="de/template.html" id="Feld"/>
+            <keyword name="Kommentar" ref="de/template.html" id="Kommentar"/>
+            <keyword name="Auswahlfeld" ref="de/template.html" id="Auswahlfeld"/>
+            <keyword name="Eingabefeld" ref="de/template.html" id="Eingabefeld"/>
+        </keywords>
+        <files>
+            <file>style.css</file>
+            <file>de/csvfile.html</file>
+            <file>de/index.html</file>
+            <file>de/template.html</file>
+            <file>de/images/handbook.png</file>
+            <file>de/images/example_templ.png</file>
+            <file>de/images/example_result.png</file>
+        </files>
+    </filterSection>
+</QtHelpProject>
