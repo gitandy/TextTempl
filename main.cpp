@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
-#include <QDebug>
 #include "MainApp.h"
 
 int main(int argc, char* argv[])

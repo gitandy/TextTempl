@@ -9,7 +9,7 @@
         <location filename="MainApp.cpp" line="243"/>
         <location filename="MainApp.cpp" line="273"/>
         <location filename="MainApp.cpp" line="333"/>
-        <location filename="MainApp.cpp" line="495"/>
+        <location filename="MainApp.cpp" line="513"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -40,6 +40,7 @@
         <location filename="MainApp.cpp" line="238"/>
         <location filename="MainApp.cpp" line="268"/>
         <location filename="MainApp.cpp" line="319"/>
+        <location filename="MainApp.cpp" line="370"/>
         <source>All Files</source>
         <translation>Alle Dateien</translation>
     </message>
@@ -50,7 +51,17 @@
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="495"/>
+        <location filename="MainApp.cpp" line="319"/>
+        <source>Create selected</source>
+        <translation>Selektierte erstellen</translation>
+    </message>
+    <message>
+        <location filename="MainApp.cpp" line="370"/>
+        <source>Create all</source>
+        <translation>Alle erstellen</translation>
+    </message>
+    <message>
+        <location filename="MainApp.cpp" line="513"/>
         <source>The file contains no or bad template data</source>
         <translation>Die Datei enthält keine oder nicht verwertbare Vorlagedaten</translation>
     </message>
@@ -80,15 +91,12 @@
         <location filename="MainApp.cpp" line="311"/>
         <location filename="MainApp.cpp" line="312"/>
         <location filename="MainApp.cpp" line="337"/>
-        <location filename="MainApp.cpp" line="367"/>
-        <location filename="MainApp.cpp" line="368"/>
+        <location filename="MainApp.cpp" line="362"/>
+        <location filename="MainApp.cpp" line="363"/>
+        <location filename="MainApp.cpp" line="385"/>
+        <location filename="MainApp.cpp" line="386"/>
         <source>Name</source>
         <translation></translation>
-    </message>
-    <message>
-        <location filename="MainApp.cpp" line="319"/>
-        <source>Save file</source>
-        <translation>Datei speichern</translation>
     </message>
     <message>
         <location filename="MainApp.cpp" line="219"/>
@@ -98,35 +106,34 @@
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="360"/>
         <source>Save all</source>
-        <translation>Alle speichern</translation>
+        <translation type="obsolete">Alle speichern</translation>
     </message>
     <message>
         <location filename="MainApp.cpp" line="112"/>
-        <location filename="MainApp.cpp" line="372"/>
+        <location filename="MainApp.cpp" line="390"/>
         <source>unnamed</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="532"/>
+        <location filename="MainApp.cpp" line="550"/>
         <source>Reload Template?</source>
         <translation>Vorlage neu laden?</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="532"/>
+        <location filename="MainApp.cpp" line="550"/>
         <source>When reloading the template
 all form data will be lost</source>
         <translation>Beim erneuten Laden
 gehen alle Formulardaten verloren</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="631"/>
+        <location filename="MainApp.cpp" line="649"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="MainApp.cpp" line="631"/>
+        <location filename="MainApp.cpp" line="649"/>
         <source>TextTempl</source>
         <translation></translation>
     </message>

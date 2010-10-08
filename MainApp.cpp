@@ -316,7 +316,7 @@ void MainApp::createFile()
         }
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), this->settings->value("savepath").toString() + fileDefault, tr("All Files") + " (*.*)");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Create selected"), this->settings->value("savepath").toString() + fileDefault, tr("All Files") + " (*.*)");
 
     if(fileName != "") {
         int posLastSep = fileName.lastIndexOf('/', -1);
@@ -357,13 +357,31 @@ void MainApp::writeFile(QString fileName, int col)
  */
 void MainApp::createAll()
 {
-    QString dirName = QFileDialog::getExistingDirectory(this, tr("Save all"), this->settings->value("savepath").toString(), QFileDialog::ShowDirsOnly);
+    QString fileDefault = "";
 
-    if(dirName != "") {
+    if(this->fieldsMap.contains(tr("Name"))){
+        QString text = this->cellText(fieldsMap.value(tr("Name")), 0);
+
+        if(text.trimmed() != "") {
+            fileDefault = "/" + text + ".txt";
+        }
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Create all"), this->settings->value("savepath").toString() + fileDefault, tr("All Files") + " (*.*)");
+
+    if(fileName != "") {
+        int posLastSep = fileName.lastIndexOf('/');
+        QString dirName = fileName.left(posLastSep);
         this->settings->setValue("savepath", dirName);
 
+        int posFileExt = fileName.lastIndexOf('.');
+        QString ext = ".txt";
+        if(posFileExt > 0) {
+            ext = fileName.mid(posFileExt);
+        }
+
         for(int c = 0; c < this->tableWidget->columnCount(); c++) {
-            QString fileName = "";
+            fileName = "";
             if(fieldsMap.contains(tr("Name"))){
                 fileName = this->cellText(fieldsMap.value(tr("Name")), c).trimmed();
             }
@@ -372,7 +390,7 @@ void MainApp::createAll()
                 fileName = tr("unnamed") + "_" + QString::number(c + 1);
             }
 
-            fileName = dirName + "/" + fileName + ".txt";
+            fileName = dirName + "/" + fileName + ext;
 
             this->writeFile(fileName, c);
         }
