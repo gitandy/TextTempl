@@ -12,6 +12,7 @@ qrc_*.cpp
 debug
 release
 dist
+Thumbs.db
 Makefile
 Makefile.Debug
 Makefile.Release
