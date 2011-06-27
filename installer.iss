@@ -14,7 +14,7 @@ Source: templates\UserConfig.templ; DestDir: {app}\templates; Components: Exampl
 MinVersion=0,5.01.2600
 AppCopyright=©2010, SST Signal & System Technik GmbH
 AppName={#MyAppName}
-AppVerName={#MyAppVersion}
+AppVerName={#MyAppName}-{#MyAppVersion}
 PrivilegesRequired=none
 DefaultDirName={pf}\{#MyAppName}
 AppID={{EE99EB5D-F8BB-47AB-817B-08A74556B122}
